@@ -1,3 +1,7 @@
 <resources>
+    //System Strings
     <string name="app_name">group4_DecisionBasedGame</string>
+    <string name="back_button">Back</string>
+
+
 </resources>
