@@ -6,20 +6,24 @@ public class Story {
     GameScreen gs;
     String nextPosition1, nextPosition2;
 
-
+    //Allows Story class to access buttons and textviews from GameScreen
     public Story(GameScreen gs) {
 
         this.gs = gs;
     }
+
     public void selectPosition(String position){
+    //Corresponds buttons to cases
 
         switch(position){
+            //cases for Story strings
             case "startingPoint": startingPoint(); break;
             case "gameOver": gameOver(); break;
             case "oldMan": oldMan(); break;
         }
     }
     public void startingPoint(){
+            //sets text for the case "startingPoint"
 
         gs.text.setText("You are at the Demon Lord Castle Gate.\n" +
                         "what will you do?");
@@ -29,6 +33,7 @@ public class Story {
 
         nextPosition1 = "oldMan";
         nextPosition2 = "gameOver";
+            //Directs the buttons to the next case
     }
 
     public void gameOver(){

@@ -18,27 +18,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //XML ids for text and button
         text = findViewById(R.id.textView);
         btn1 = findViewById(R.id.btnchoice1);
 
-
-
-
-
+        //String for the setting
         String setting =
                 "Once upon a time, a demon lord was overruling humans. \n" +
                         "A man sick of this decided to fight the demon lord and end this";
         text.setText(setting);
-
-
     }
 
     public void goGameScreen(View v) {
-
+        //Runs the code for the button to go to the next activity
         Intent gamescreen = new Intent(this, GameScreen.class);
         startActivity(gamescreen);
-
-
         }
     }
 
