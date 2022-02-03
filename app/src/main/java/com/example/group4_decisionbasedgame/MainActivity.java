@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 "Once upon a time, a demon lord was overruling humans. \n" +
                         "A man sick of this decided to fight the demon lord and end this";
         text.setText(setting);
+
     }
 
     public void goGameScreen(View v) {

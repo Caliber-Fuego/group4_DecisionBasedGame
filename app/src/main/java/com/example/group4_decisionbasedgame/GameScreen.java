@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.group4_decisionbasedgame.weapon.HandWeapon;
+import com.example.group4_decisionbasedgame.weapon.Weapon_Stick;
+
 public class GameScreen extends AppCompatActivity{
 
     TextView text, hptext;
@@ -18,6 +21,8 @@ public class GameScreen extends AppCompatActivity{
 
     //Allows GameScreen class to call variables from HeroStats class
     HeroStats hs = new HeroStats();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,7 @@ public class GameScreen extends AppCompatActivity{
 
         //The starting point of the game
         story.startingPoint();
+        hs.currentWeapon = new Weapon_Stick();
 
         //Displays the health points of the player
         hptext.setText(String.valueOf(hs.heroHPoints));
@@ -56,8 +62,4 @@ public class GameScreen extends AppCompatActivity{
         startActivity(openHeroStats);
 
     }
-
-
-
-
 }
