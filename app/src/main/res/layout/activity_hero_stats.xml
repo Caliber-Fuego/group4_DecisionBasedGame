@@ -86,36 +86,15 @@
         app:layout_constraintTop_toBottomOf="@+id/heroHP" />
 
     <TextView
-        android:id="@+id/damagedash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="-"
-        app:layout_constraintEnd_toEndOf="@+id/heroHP"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="@+id/heroHP"
-        app:layout_constraintTop_toBottomOf="@+id/heroHP" />
-
-    <TextView
         android:id="@+id/minDmg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="80dp"
         android:text="NaN"
-        app:layout_constraintEnd_toStartOf="@+id/weaponName"
-        app:layout_constraintTop_toBottomOf="@+id/weaponName" />
-
-    <TextView
-        android:id="@+id/maxDmg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="48dp"
-        android:text="NaN"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/weaponName"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/weaponName"
-        app:layout_constraintTop_toBottomOf="@+id/weaponName" />
+        app:layout_constraintStart_toStartOf="@+id/weaponName"
+        app:layout_constraintTop_toBottomOf="@+id/heroHP" />
 
     <ImageButton
         android:id="@+id/stickButton"

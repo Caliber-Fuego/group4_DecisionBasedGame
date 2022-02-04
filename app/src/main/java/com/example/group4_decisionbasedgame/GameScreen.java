@@ -8,12 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.group4_decisionbasedgame.weapon.HandWeapon;
-import com.example.group4_decisionbasedgame.weapon.Weapon_Stick;
+import com.example.group4_decisionbasedgame.weapon.Weapon_Barehand;
 
 public class GameScreen extends AppCompatActivity{
 
-    TextView text, hptext;
+    TextView text, hptext, wpntxt;
     Button btn1, btn2, statsbtn;
 
     //Allows GameScreen class to call strings from Story class
@@ -22,7 +21,8 @@ public class GameScreen extends AppCompatActivity{
     //Allows GameScreen class to call variables from HeroStats class
     HeroStats hs = new HeroStats();
 
-
+    //Allows GameScreen to call values from PlayerStatus
+    PlayerStatus status = new PlayerStatus();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +32,19 @@ public class GameScreen extends AppCompatActivity{
         //XML ids for texts and buttons
         text = (TextView)findViewById(R.id.storyText);
         hptext = (TextView)findViewById(R.id.healthDisplay);
+        wpntxt = (TextView)findViewById(R.id.weapondisplayName);
+
 
         btn1 = (Button) findViewById(R.id.btnchoice01);
         btn2 = (Button) findViewById(R.id.btnchoice02);
 
         //The starting point of the game
         story.startingPoint();
-        hs.currentWeapon = new Weapon_Stick();
+        status = new Weapon_Barehand();
 
         //Displays the health points of the player
-        hptext.setText(String.valueOf(hs.heroHPoints));
-
+        hptext.setText(String.valueOf(status.getHeroHPoints()));
+        wpntxt.setText(status.name);
     }
 
     public void btn1 (View view){

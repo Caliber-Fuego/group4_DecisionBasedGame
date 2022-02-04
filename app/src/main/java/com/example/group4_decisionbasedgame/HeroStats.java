@@ -9,9 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import com.example.group4_decisionbasedgame.weapon.HandWeapon;
-import com.example.group4_decisionbasedgame.weapon.Weapon_LongSword;
-import com.example.group4_decisionbasedgame.weapon.Weapon_Stick;
 
 public class HeroStats extends AppCompatActivity implements View.OnClickListener{
 
@@ -19,24 +16,14 @@ public class HeroStats extends AppCompatActivity implements View.OnClickListener
     Button backButton;
     ImageButton equipStick;
 
-    //Lets the activity use the weapons
-    HandWeapon hw = new HandWeapon();
-    public HandWeapon currentWeapon;
-
-
-    //Hero Stats
-    int heroHPoints = 100;
-    int heroMinDamage = (100);
-    int heroMaxDamage = (150);
+    //Lets the activity call values from PlayerStatus
+    PlayerStatus status = new PlayerStatus();
 
     //Monster Stats
     String monsName = "Monster";
-    int monHPoints = 30;
+    int monHPoints = 300;
     int monMinDamage = 10;
     int monMaxDamage = 15;
-
-
-
 
 
     @Override
@@ -44,36 +31,33 @@ public class HeroStats extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hero_stats);
 
+        //XML IDs for texts and buttons
         txtHeroHp = findViewById(R.id.heroHP);
         txtWeapon = findViewById(R.id.weaponName);
         txtMinDmg = findViewById(R.id.minDmg);
-        txtMaxDmg = findViewById(R.id.maxDmg);
 
         backButton = findViewById(R.id.backButton);
         equipStick = findViewById(stickButton);
 
 
+        //Calls values from PlayerStatus
+        txtHeroHp.setText(String.valueOf(status.getHeroHPoints()));
+        txtMinDmg.setText(String.valueOf(status.getHeroMinDamage() +" - "+status.getHeroMaxDamage()));
+        txtWeapon.setText(status.name);
 
+
+        //Sets onclicklisteners for the buttons
+        equipStick.setOnClickListener(this);
+        backButton.setOnClickListener(this);
     }
+
     public void onClick (View v) {
         switch (v.getId()) {
-            case R.id.stickButton:
-                currentWeapon = new Weapon_Stick();
-                break;
             case R.id.backButton:
                 finish();
                 break;
         }
-        txtHeroHp.setText(String.valueOf(heroHPoints));
-        txtMinDmg.setText(String.valueOf(heroMinDamage + currentWeapon.damage));
-        txtMaxDmg.setText(String.valueOf(heroMaxDamage + currentWeapon.damage));
 
-
-        equipStick.setOnClickListener(this);
-        backButton.setOnClickListener(this);
-
-
-        txtWeapon.setText(currentWeapon.name);
     }
 
 }

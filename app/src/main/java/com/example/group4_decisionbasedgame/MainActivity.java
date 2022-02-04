@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goGameScreen(View v) {
-        //Runs the code for the button to go to the next activity
+        //Runs the code for the button to go to the GameScreen activity
         Intent gamescreen = new Intent(this, GameScreen.class);
         startActivity(gamescreen);
         }
