@@ -1,6 +1,6 @@
-package com.example.group4_decisionbasedgame.weapon;
+package com.example.group4_decisionbasedgame.values.weapon;
 
-import com.example.group4_decisionbasedgame.PlayerStatus;
+import com.example.group4_decisionbasedgame.model.PlayerStatus;
 
 public class Weapon_Barehand extends PlayerStatus {
 

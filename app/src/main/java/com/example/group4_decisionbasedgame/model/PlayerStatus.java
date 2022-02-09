@@ -1,5 +1,7 @@
-package com.example.group4_decisionbasedgame;
+package com.example.group4_decisionbasedgame.model;
 
+
+import java.util.Random;
 
 public class PlayerStatus {
 
@@ -12,16 +14,17 @@ public class PlayerStatus {
     private static int heroMinDamage = 100;
     private static int heroMaxDamage = 150;
 
+
     //Setters for int values
     public void setHeroHPoints(int heroHPoints) {
-        this.heroHPoints = heroHPoints;
+        PlayerStatus.heroHPoints = heroHPoints;
     }
     public void setHeroMinDamage(int heroMinDamage) {
-        this.heroMinDamage = heroMinDamage;
+        PlayerStatus.heroMinDamage = heroMinDamage;
     }
 
     public void setHeroMaxDamage(int heroMaxDamage) {
-        this.heroMaxDamage = heroMaxDamage;
+        PlayerStatus.heroMaxDamage = heroMaxDamage;
     }
 
 
@@ -34,6 +37,15 @@ public class PlayerStatus {
     }
     public int getHeroMaxDamage() {
         return heroMaxDamage;
+    }
+
+    //Method for the damage calculation
+    public int baseDamage(int heroMinDamage, int heroMaxDamage) {
+        Random randomizer = new Random();
+        return (randomizer.nextInt(heroMaxDamage - heroMinDamage) + heroMinDamage);
+    }
+    public int baseDamage(){
+        return (0);
     }
 
 }

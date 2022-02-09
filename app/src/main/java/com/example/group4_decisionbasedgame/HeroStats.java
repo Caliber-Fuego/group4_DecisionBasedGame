@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.group4_decisionbasedgame.model.PlayerStatus;
+
 public class HeroStats extends AppCompatActivity implements View.OnClickListener{
 
     TextView txtHeroHp, txtWeapon, txtMinDmg, txtMaxDmg;
@@ -18,13 +20,6 @@ public class HeroStats extends AppCompatActivity implements View.OnClickListener
 
     //Lets the activity call values from PlayerStatus
     PlayerStatus status = new PlayerStatus();
-
-    //Monster Stats
-    String monsName = "Monster";
-    int monHPoints = 300;
-    int monMinDamage = 10;
-    int monMaxDamage = 15;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -8,7 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.group4_decisionbasedgame.weapon.Weapon_Barehand;
+import com.example.group4_decisionbasedgame.model.PlayerStatus;
+import com.example.group4_decisionbasedgame.values.weapon.Weapon_Barehand;
 
 public class GameScreen extends AppCompatActivity{
 
@@ -34,7 +35,6 @@ public class GameScreen extends AppCompatActivity{
         hptext = (TextView)findViewById(R.id.healthDisplay);
         wpntxt = (TextView)findViewById(R.id.weapondisplayName);
 
-
         btn1 = (Button) findViewById(R.id.btnchoice01);
         btn2 = (Button) findViewById(R.id.btnchoice02);
 
@@ -45,6 +45,7 @@ public class GameScreen extends AppCompatActivity{
         //Displays the health points of the player
         hptext.setText(String.valueOf(status.getHeroHPoints()));
         wpntxt.setText(status.name);
+
     }
 
     public void btn1 (View view){
