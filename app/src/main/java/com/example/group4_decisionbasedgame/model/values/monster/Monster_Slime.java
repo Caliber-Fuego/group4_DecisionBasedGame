@@ -1,4 +1,4 @@
-package com.example.group4_decisionbasedgame.values.monster;
+package com.example.group4_decisionbasedgame.model.values.monster;
 
 import com.example.group4_decisionbasedgame.model.MonsterStatus;
 

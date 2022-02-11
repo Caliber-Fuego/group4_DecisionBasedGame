@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HeroStats">
+    tools:context=".view.HeroStats">
 
     <TextView
         android:id="@+id/Hero"
@@ -67,12 +67,45 @@
         android:id="@+id/damageDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="124dp"
         android:text="Damage:"
         app:layout_constraintEnd_toEndOf="@+id/healthName"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/healthName"
         app:layout_constraintTop_toBottomOf="@+id/healthName" />
+
+    <TextView
+        android:id="@+id/armorDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="Armor:"
+        app:layout_constraintEnd_toEndOf="@+id/healthName"
+        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintStart_toStartOf="@+id/healthName"
+        app:layout_constraintTop_toBottomOf="@+id/healthName" />
+
+    <TextView
+        android:id="@+id/minDmg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
+        android:text="NaN"
+        app:layout_constraintEnd_toEndOf="@+id/weaponName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/weaponName"
+        app:layout_constraintTop_toBottomOf="@+id/heroHP" />
+
+    <TextView
+        android:id="@+id/armornmbr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="NaN"
+        app:layout_constraintEnd_toEndOf="@+id/weaponName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/weaponName"
+        app:layout_constraintTop_toBottomOf="@+id/heroHP" />
 
     <TextView
         android:id="@+id/weaponName"
@@ -85,27 +118,36 @@
         app:layout_constraintStart_toStartOf="@+id/heroHP"
         app:layout_constraintTop_toBottomOf="@+id/heroHP" />
 
-    <TextView
-        android:id="@+id/minDmg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="NaN"
-        app:layout_constraintEnd_toEndOf="@+id/weaponName"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/weaponName"
-        app:layout_constraintTop_toBottomOf="@+id/heroHP" />
-
     <ImageButton
-        android:id="@+id/stickButton"
+        android:id="@+id/invSlot1"
         android:layout_width="46dp"
         android:layout_height="47dp"
-        android:layout_marginBottom="380dp"
+        android:layout_marginStart="84dp"
         android:onClick="onClick"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.687"
         app:srcCompat="@drawable/weapon_sticksmall" />
+
+    <ImageButton
+        android:id="@+id/invSlot4"
+        android:layout_width="46dp"
+        android:layout_height="47dp"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toBottomOf="@+id/invSlot1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/invSlot1"
+        app:layout_constraintTop_toTopOf="@+id/invSlot1"
+        app:srcCompat="@drawable/weapon_sticksmall" />
+
+    <TextView
+        android:id="@+id/hpbottleamt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/invSlot1"
+        app:layout_constraintStart_toStartOf="@+id/invSlot1"
+        app:layout_constraintTop_toBottomOf="@+id/invSlot1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

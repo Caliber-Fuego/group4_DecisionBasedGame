@@ -1,4 +1,4 @@
-package com.example.group4_decisionbasedgame.values.weapon;
+package com.example.group4_decisionbasedgame.model.values.weapon;
 
 import com.example.group4_decisionbasedgame.model.PlayerStatus;
 

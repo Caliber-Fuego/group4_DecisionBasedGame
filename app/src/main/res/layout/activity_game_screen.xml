@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameScreen">
+    tools:context=".view.GameScreen">
 
     <TextView
         android:id="@+id/storyText"
@@ -21,7 +21,7 @@
         android:id="@+id/btnchoice01"
         android:layout_width="300dp"
         android:layout_height="51dp"
-        android:layout_marginBottom="252dp"
+        android:layout_marginBottom="180dp"
         android:onClick="btn1"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,10 +33,11 @@
         android:id="@+id/btnchoice02"
         android:layout_width="300dp"
         android:layout_height="51dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="28dp"
         android:onClick="btn2"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="@+id/btnchoice01"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnchoice01"
         app:layout_constraintTop_toBottomOf="@+id/btnchoice01" />
 
@@ -44,7 +45,7 @@
         android:id="@+id/heroHPDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="340dp"
+        android:layout_marginBottom="324dp"
         android:text="Health:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,16 +53,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/weapondisplayName"
-        android:layout_width="84dp"
-        android:layout_height="20dp"
-        android:text="NaN"
-        app:layout_constraintBottom_toBottomOf="@+id/weaponDisplay"
+        android:id="@+id/weaponDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="324dp"
+        android:text="Weapon:"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.033"
-        app:layout_constraintStart_toEndOf="@+id/weaponDisplay"
-        app:layout_constraintTop_toTopOf="@+id/weaponDisplay"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.654"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/healthDisplay"
@@ -76,15 +76,16 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/weaponDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="312dp"
-        android:text="Weapon:"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/weapondisplayName"
+        android:layout_width="84dp"
+        android:layout_height="20dp"
+        android:text="NaN"
+        app:layout_constraintBottom_toBottomOf="@+id/weaponDisplay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.033"
+        app:layout_constraintStart_toEndOf="@+id/weaponDisplay"
+        app:layout_constraintTop_toTopOf="@+id/weaponDisplay"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/statsButton"
@@ -97,4 +98,60 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/itembtn1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="272dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/weapon_sticksmall" />
+
+    <ImageButton
+        android:id="@+id/itembtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/itembtn1"
+        app:layout_constraintStart_toEndOf="@+id/itembtn1"
+        app:layout_constraintTop_toTopOf="@+id/itembtn1"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/weapon_sticksmall" />
+
+    <ImageButton
+        android:id="@+id/itembtn2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/itembtn1"
+        app:layout_constraintStart_toEndOf="@+id/itembtn1"
+        app:layout_constraintTop_toTopOf="@+id/itembtn1"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/weapon_sticksmall" />
+
+    <TextView
+        android:id="@+id/itemqty1"
+        android:layout_width="44dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/itembtn1"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="@+id/itembtn1"
+        app:layout_constraintTop_toBottomOf="@+id/itembtn1" />
+
+    <TextView
+        android:id="@+id/itemqty2"
+        android:layout_width="44dp"
+        android:layout_height="37dp"
+        android:gravity="center"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/itemqty1"
+        app:layout_constraintEnd_toEndOf="@+id/itembtn"
+        app:layout_constraintStart_toStartOf="@+id/itembtn"
+        app:layout_constraintTop_toTopOf="@+id/itemqty1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

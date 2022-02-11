@@ -41,15 +41,7 @@ public class MonsterStatus {
         this.monMaxDmg = monMaxDmg;
     }
 
-    //Monster Damage Calculations
-    public int monsterDamage (int monMinDamage, int monMaxDamage){
-        Random randomizer = new Random();
-        return (randomizer.nextInt(monMaxDamage - monMinDamage) + monMinDamage);
 
-    }
-    public int monsterDamage(){
-        return (0);
-    }
 
 
 }

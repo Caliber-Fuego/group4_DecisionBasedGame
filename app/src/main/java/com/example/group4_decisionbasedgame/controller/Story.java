@@ -1,17 +1,23 @@
-package com.example.group4_decisionbasedgame;
+package com.example.group4_decisionbasedgame.controller;
 
-import com.example.group4_decisionbasedgame.values.monster.Monster_Slime;
+import com.example.group4_decisionbasedgame.view.GameScreen;
+import com.example.group4_decisionbasedgame.view.HeroStats;
+import com.example.group4_decisionbasedgame.model.Items;
+import com.example.group4_decisionbasedgame.model.values.items.item_hpBottle;
+import com.example.group4_decisionbasedgame.model.values.monster.Monster_Slime;
 import com.example.group4_decisionbasedgame.model.MonsterStatus;
 import com.example.group4_decisionbasedgame.model.PlayerStatus;
-import com.example.group4_decisionbasedgame.values.weapon.Weapon_Barehand;
-import com.example.group4_decisionbasedgame.values.weapon.Weapon_LongSword;
+import com.example.group4_decisionbasedgame.model.values.weapon.Weapon_Barehand;
+import com.example.group4_decisionbasedgame.model.values.weapon.Weapon_LongSword;
 
 import java.util.Random;
 
 public class Story {
     GameScreen gs;
-    String nextPosition1;
-    String nextPosition2;
+    HeroStats hs;
+    Items items;
+    public String nextPosition1;
+    public String nextPosition2;
 
     //Lets Story call values from Player Status
     PlayerStatus status = new PlayerStatus();
@@ -19,14 +25,14 @@ public class Story {
     //Lets Story call values from Monster Status
     MonsterStatus monster = new MonsterStatus();
 
+    GameCalculations gc = new GameCalculations();
+
     int floorCounter = 0;
 
 
     //Allows Story class to access buttons and textviews from GameScreen
-    public Story(GameScreen gs) {
+    public Story(GameScreen gs){this.gs = gs;}
 
-        this.gs = gs;
-    }
 
 
     public void selectPosition(String position){
@@ -44,7 +50,7 @@ public class Story {
             case "win": win(); break;
             case "lose": lose(); break;
             case "healingRoom": healingRoom(); break;
-            case "itemroom": itemRoom(); break;
+            case "itemRoom": itemRoom(); break;
             case "minibossRoom": minibossRoom(); break;
         }
     }
@@ -92,10 +98,7 @@ public class Story {
         gs.text.setText("Good luck young man on your quest");
         status = new Weapon_LongSword();
         gs.wpntxt.setText(status.name);
-        status.setHeroMinDamage(status.damage + status.getHeroMinDamage());
-        status.getHeroMinDamage();
-        status.setHeroMaxDamage(status.damage + status.getHeroMaxDamage());
-        status.getHeroMaxDamage();
+        status.addDamage(status.damage, status.getHeroMinDamage(), status.getHeroMaxDamage());
 
         gs.btn1.setText("Continue on");
         gs.btn2.setText("Go back outside");
@@ -117,7 +120,7 @@ public class Story {
     public  void playerAttack(){
 
         //Calculates Player Damage to the Monster
-        int playerDamage = status.baseDamage(status.getHeroMinDamage(), status.getHeroMaxDamage());
+        int playerDamage = gc.baseDamage(status.getHeroMinDamage(), status.getHeroMaxDamage(),0);
         gs.text.setText("You attacked the monster and gave " + playerDamage + " damage");
 
         monster.setMonHPts(monster.getMonHPts() - playerDamage);
@@ -130,7 +133,6 @@ public class Story {
         if(monster.getMonHPts() >  0){
             nextPosition1 = "monsterAttack";
             nextPosition2 = " ";
-
         }
         //If Monster HP is 0, moves to the victory screen
         else if(monster.getMonHPts() < 1){
@@ -142,7 +144,9 @@ public class Story {
     public void monsterAttack(){
 
     //Calculates Monster Damage to the Player
-        int monsterDamage = monster.monsterDamage(monster.getMonMinDmg(), monster.getMonMaxDmg());
+        int monsterDamage = gc.baseDamage(monster.getMonMinDmg(),monster.getMonMaxDmg(),status.getArmor());
+        gs.text.setText("The "+monster.getMonsterName()+" dealt "+monsterDamage+" damage to you");
+
         status.setHeroHPoints(status.getHeroHPoints() - monsterDamage);
         status.getHeroHPoints();
         gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
@@ -172,13 +176,13 @@ public class Story {
         Random roll = new Random();
         int diceRoll = roll.nextInt(3);
 
-        if (diceRoll==1){
+        if (diceRoll==0){
             nextPosition1 = "monsterEncounter";
             nextPosition2 = "";
-        } else if (diceRoll==2){
+        } else if (diceRoll==1){
             nextPosition1 = "healingRoom";
             nextPosition2 = "";
-        } else if (diceRoll==3){
+        } else if (diceRoll==2){
             nextPosition1 = "itemRoom";
             nextPosition2 = "";
         }
@@ -211,20 +215,19 @@ public class Story {
                         "You decide to take a rest");
 
         //Adds 40% of the Player HP to Player's HP
-        status.setHeroHPoints(status.getHeroHPoints() + (int)(status.getHeroHPoints()*(40.0f/100.0f)));
-        status.getHeroHPoints();
+        status.healHP(status.getHeroHPoints(), 40);
         gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
 
         Random roll = new Random();
         int diceRoll = roll.nextInt(3);
 
-        if (diceRoll==1){
+        if (diceRoll==0){
             nextPosition1 = "monsterEncounter";
             nextPosition2 = "";
-        } else if (diceRoll==2){
+        } else if (diceRoll==1){
             nextPosition1 = "healingRoom";
             nextPosition2 = "";
-        } else if (diceRoll==3){
+        } else if (diceRoll==2){
             nextPosition1 = "itemRoom";
             nextPosition2 = "";
         }
@@ -239,18 +242,37 @@ public class Story {
 
     }
     public void itemRoom (){
-        gs.text.setText("You find a treasure chest up ahead");
-
         Random roll = new Random();
+
+        //Rolls from 0 - 2 and then sets elements into the assigned number
+        int itemRoll = roll.nextInt(3);
+        if (itemRoll==0){
+            //Gives the player an hpBottle
+            gs.text.setText("You found a treasure!");
+            items = new item_hpBottle();
+            items.setQuantity(items.getQuantity()+1);
+            gs.itemqty1.setText(String.valueOf(items.getQuantity()));
+        } else if (itemRoll==1){
+            gs.text.setText("You found a treasure!");
+            items = new item_hpBottle();
+            items.setQuantity(items.getQuantity()+1);
+            gs.itemqty1.setText(String.valueOf(items.getQuantity()));
+        } else if (itemRoll==2){
+            //Gives the player an armor
+            gs.text.setText("You found an ancient armor!");
+            status.setArmor(status.getArmor()+1);
+        }
+
+
         int diceRoll = roll.nextInt(3);
 
-        if (diceRoll==1){
+        if (diceRoll==0){
             nextPosition1 = "monsterEncounter";
             nextPosition2 = "";
-        } else if (diceRoll==2){
+        } else if (diceRoll==1){
             nextPosition1 = "healingRoom";
             nextPosition2 = "";
-        } else if (diceRoll==3){
+        } else if (diceRoll==2){
             nextPosition1 = "itemRoom";
             nextPosition2 = "";
         }
@@ -267,5 +289,4 @@ public class Story {
         gs.text.setText("a Floor master appears!");
 
     }
-
 }

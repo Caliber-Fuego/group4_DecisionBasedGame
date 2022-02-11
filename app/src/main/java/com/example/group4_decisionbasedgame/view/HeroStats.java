@@ -1,6 +1,7 @@
-package com.example.group4_decisionbasedgame;
+package com.example.group4_decisionbasedgame.view;
 
-import static com.example.group4_decisionbasedgame.R.id.stickButton;
+import static com.example.group4_decisionbasedgame.R.id.invSlot1;
+import static com.example.group4_decisionbasedgame.R.id.invSlot4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,16 +11,21 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.group4_decisionbasedgame.R;
+import com.example.group4_decisionbasedgame.model.Items;
 import com.example.group4_decisionbasedgame.model.PlayerStatus;
+import com.example.group4_decisionbasedgame.model.values.items.item_hpBottle;
 
 public class HeroStats extends AppCompatActivity implements View.OnClickListener{
 
-    TextView txtHeroHp, txtWeapon, txtMinDmg, txtMaxDmg;
+    Items items = new Items();
+    TextView txtHeroHp, txtWeapon, txtMinDmg, txthpBottle, txtArmor;
     Button backButton;
-    ImageButton equipStick;
+    public ImageButton slot1, slot4;
 
     //Lets the activity call values from PlayerStatus
     PlayerStatus status = new PlayerStatus();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,21 +36,30 @@ public class HeroStats extends AppCompatActivity implements View.OnClickListener
         txtHeroHp = findViewById(R.id.heroHP);
         txtWeapon = findViewById(R.id.weaponName);
         txtMinDmg = findViewById(R.id.minDmg);
+        txthpBottle = findViewById(R.id.hpbottleamt);
+        txtArmor = findViewById(R.id.armornmbr);
 
         backButton = findViewById(R.id.backButton);
-        equipStick = findViewById(stickButton);
+
+        slot1 = findViewById(invSlot1);
+        slot4 = findViewById(invSlot4);
 
 
         //Calls values from PlayerStatus
-        txtHeroHp.setText(String.valueOf(status.getHeroHPoints()));
+        txtHeroHp.setText(String.valueOf(status.getHeroHPoints() +"/"  +status.getMaxheroHPoints()));
         txtMinDmg.setText(String.valueOf(status.getHeroMinDamage() +" - "+status.getHeroMaxDamage()));
+        txtArmor.setText(String.valueOf(status.getArmor()));
         txtWeapon.setText(status.name);
+        txthpBottle.setText(String.valueOf(items.getQuantity()));
 
 
         //Sets onclicklisteners for the buttons
-        equipStick.setOnClickListener(this);
+        slot1.setOnClickListener(this);
+        slot4.setOnClickListener(this);
         backButton.setOnClickListener(this);
     }
+
+
 
     public void onClick (View v) {
         switch (v.getId()) {
@@ -52,7 +67,7 @@ public class HeroStats extends AppCompatActivity implements View.OnClickListener
                 finish();
                 break;
         }
-
     }
-
 }
+
+
