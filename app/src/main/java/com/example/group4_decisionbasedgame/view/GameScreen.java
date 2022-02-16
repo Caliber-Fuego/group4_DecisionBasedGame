@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.group4_decisionbasedgame.R;
@@ -22,8 +23,9 @@ import org.w3c.dom.Text;
 public class GameScreen extends AppCompatActivity implements View.OnClickListener {
 
     public TextView text, hptext, wpntxt, itemqty1;
-    public Button btn1, btn2, statsbtn;
+    public Button btn1, btn2, btn3, btn4, statsbtn;
     public ImageButton itembtn1;
+    public ProgressBar healthbar;
 
     //Allows GameScreen class to call strings from Story class
     Story story = new Story(this);
@@ -49,9 +51,12 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         hptext = (TextView)findViewById(R.id.healthDisplay);
         wpntxt = (TextView)findViewById(R.id.weapondisplayName);
         itemqty1 = (TextView)findViewById(R.id.itemqty1);
+        healthbar = (ProgressBar)findViewById(R.id.hpBar);
 
         btn1 = (Button) findViewById(R.id.btnchoice01);
         btn2 = (Button) findViewById(R.id.btnchoice02);
+        btn3 = (Button) findViewById(R.id.btnchoice03);
+        btn4 = (Button) findViewById(R.id.btnchoice04);
         itembtn1 = (ImageButton) findViewById(R.id.itembtn1);
 
         //The starting point of the game
@@ -61,6 +66,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
         //Displays the health points of the player
         hptext.setText(String.valueOf(status.getHeroHPoints()));
+        healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
         wpntxt.setText(status.name);
         itemqty1.setText(String.valueOf(item.getQuantity()));
 
@@ -70,6 +76,9 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         //Runs the code to move on to the case placed in the button
     public void btn1 (View view){story.selectPosition(story.nextPosition1);}
     public void btn2 (View view){story.selectPosition(story.nextPosition2);}
+    public void btn3 (View view){story.selectPosition(story.nextPosition3);}
+    public void btn4 (View view){story.selectPosition(story.nextPosition4);}
+
 
 
 
@@ -88,6 +97,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                     status.healHP(status.getHeroHPoints(), item.getHeal());
                     item.setQuantity(item.getQuantity()-1);
                     hptext.setText(String.valueOf(status.getHeroHPoints()));
+                    healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
                     itemqty1.setText(String.valueOf(item.getQuantity()));
                 } else if (item.getQuantity()==0){
                     itembtn1.setEnabled(false);

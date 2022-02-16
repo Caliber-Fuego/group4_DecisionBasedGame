@@ -1,9 +1,11 @@
 package com.example.group4_decisionbasedgame.controller;
 
+import android.widget.TextView;
+
+import com.example.group4_decisionbasedgame.model.values.monster.Monster_Floor1Boss;
 import com.example.group4_decisionbasedgame.view.GameScreen;
 import com.example.group4_decisionbasedgame.view.HeroStats;
 import com.example.group4_decisionbasedgame.model.Items;
-import com.example.group4_decisionbasedgame.model.values.items.item_hpBottle;
 import com.example.group4_decisionbasedgame.model.values.monster.Monster_Slime;
 import com.example.group4_decisionbasedgame.model.MonsterStatus;
 import com.example.group4_decisionbasedgame.model.PlayerStatus;
@@ -16,18 +18,18 @@ public class Story {
     GameScreen gs;
     HeroStats hs;
     Items items;
-    public String nextPosition1;
-    public String nextPosition2;
+    public String nextPosition1, nextPosition2, nextPosition3, nextPosition4;
 
     //Lets Story call values from Player Status
     PlayerStatus status = new PlayerStatus();
 
     //Lets Story call values from Monster Status
     MonsterStatus monster = new MonsterStatus();
+    Monster_Floor1Boss f1boss = new Monster_Floor1Boss();
 
     GameCalculations gc = new GameCalculations();
 
-    int floorCounter = 0;
+    private int floorCounter = 0;
 
 
     //Allows Story class to access buttons and textviews from GameScreen
@@ -52,11 +54,41 @@ public class Story {
             case "healingRoom": healingRoom(); break;
             case "itemRoom": itemRoom(); break;
             case "minibossRoom": minibossRoom(); break;
+            case "bossFight": bossFight(); break;
+            case "bossAttack": bossAttack(); break;
+            case "talkFight": talkFight(); break;
         }
     }
+
+    //Rolls from 1 - 3 and then moves on to the assigned method
+    public void roomRoll(TextView text){
+        Random roll = new Random();
+        int diceRoll = roll.nextInt(3);
+
+        if (diceRoll==0){
+            nextPosition1 = "monsterEncounter";
+            nextPosition2 = "";
+        } else if (diceRoll==1){
+            nextPosition1 = "healingRoom";
+            nextPosition2 = "";
+        } else if (diceRoll==2){
+            nextPosition1 = "itemRoom";
+            nextPosition2 = "";
+        }
+
+        if(floorCounter < 5){
+            floorCounter++;
+        } else if (floorCounter == 5){
+            text.setText("You feel a presence up ahead");
+            nextPosition1 = "minibossRoom";
+        }
+    }
+
     public void defaultSetup(){
         status = new Weapon_Barehand();
     }
+
+
 
     public void startingPoint(){
             //sets text for the case "startingPoint"
@@ -64,6 +96,7 @@ public class Story {
                         "what will you do?");
         status.setHeroHPoints(100);
         gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
+        gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
 
         gs.btn1.setText("Open the Gate");
         gs.btn2.setText("Go back and sleep");
@@ -150,6 +183,7 @@ public class Story {
         status.setHeroHPoints(status.getHeroHPoints() - monsterDamage);
         status.getHeroHPoints();
         gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
+        gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
 
         gs.btn1.setText(">");
         gs.btn2.setText(" ");
@@ -172,31 +206,7 @@ public class Story {
         gs.btn1.setText("Continue");
         gs.btn2.setText("");
 
-        //Rolls from 1 - 3 and then moves on to the assigned method
-        Random roll = new Random();
-        int diceRoll = roll.nextInt(3);
-
-        if (diceRoll==0){
-            nextPosition1 = "monsterEncounter";
-            nextPosition2 = "";
-        } else if (diceRoll==1){
-            nextPosition1 = "healingRoom";
-            nextPosition2 = "";
-        } else if (diceRoll==2){
-            nextPosition1 = "itemRoom";
-            nextPosition2 = "";
-        }
-
-        //Checks if Floor number is equal to five or not, if not adds +1 to the counter
-        if(floorCounter<5){
-            floorCounter++;
-        }
-        //If floor counter is equal to five, move on to the floor boss
-        else if (floorCounter==5){
-            gs.text.setText("You feel a presence up ahead");
-            nextPosition1 = "minibossRoom";
-        }
-
+        roomRoll(gs.text);
     }
 
     public void lose (){
@@ -208,8 +218,8 @@ public class Story {
         //Resets the game
         nextPosition1 = "startingPoint";
         nextPosition2 = "";
-
     }
+
     public void healingRoom (){
         gs.text.setText("You are in a space where you are safe from monster attack \n\n" +
                         "You decide to take a rest");
@@ -217,76 +227,90 @@ public class Story {
         //Adds 40% of the Player HP to Player's HP
         status.healHP(status.getHeroHPoints(), 40);
         gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
-
-        Random roll = new Random();
-        int diceRoll = roll.nextInt(3);
-
-        if (diceRoll==0){
-            nextPosition1 = "monsterEncounter";
-            nextPosition2 = "";
-        } else if (diceRoll==1){
-            nextPosition1 = "healingRoom";
-            nextPosition2 = "";
-        } else if (diceRoll==2){
-            nextPosition1 = "itemRoom";
-            nextPosition2 = "";
-        }
-
-        if(floorCounter<5){
-            floorCounter++;
-        } else if (floorCounter==5){
-            gs.text.setText("You feel a presence up ahead");
-            nextPosition1 = "minibossRoom";
-        }
+        gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
 
 
+        roomRoll(gs.text);
     }
     public void itemRoom (){
-        Random roll = new Random();
+        gc.itemRoll(gs.text, gs.itemqty1);
 
-        //Rolls from 0 - 2 and then sets elements into the assigned number
-        int itemRoll = roll.nextInt(3);
-        if (itemRoll==0){
-            //Gives the player an hpBottle
-            gs.text.setText("You found a treasure!");
-            items = new item_hpBottle();
-            items.setQuantity(items.getQuantity()+1);
-            gs.itemqty1.setText(String.valueOf(items.getQuantity()));
-        } else if (itemRoll==1){
-            gs.text.setText("You found a treasure!");
-            items = new item_hpBottle();
-            items.setQuantity(items.getQuantity()+1);
-            gs.itemqty1.setText(String.valueOf(items.getQuantity()));
-        } else if (itemRoll==2){
-            //Gives the player an armor
-            gs.text.setText("You found an ancient armor!");
-            status.setArmor(status.getArmor()+1);
-        }
-
-
-        int diceRoll = roll.nextInt(3);
-
-        if (diceRoll==0){
-            nextPosition1 = "monsterEncounter";
-            nextPosition2 = "";
-        } else if (diceRoll==1){
-            nextPosition1 = "healingRoom";
-            nextPosition2 = "";
-        } else if (diceRoll==2){
-            nextPosition1 = "itemRoom";
-            nextPosition2 = "";
-        }
-
-        if(floorCounter<5){
-            floorCounter++;
-        } else if (floorCounter==5){
-            gs.text.setText("You feel a presence up ahead");
-            nextPosition1 = "minibossRoom";
-        }
+        roomRoll(gs.text);
     }
 
     public void minibossRoom (){
-        gs.text.setText("a Floor master appears!");
+        monster = new Monster_Floor1Boss();
+        gs.text.setText("a Floor master appears! \n" +
+                        "A knight cursed by the Demon Lord, his presence feels familiar to you. \n" +
+                        "You unlocked the TALK option!");
+
+        gs.btn2.setText("Talk");
+
+        nextPosition1 = "bossFight";
+        nextPosition2 = "talkFight";
+    }
+    public void bossFight(){
+        int playerDamage = gc.baseDamage(status.getHeroMinDamage(), status.getHeroMaxDamage(),0);
+        gs.text.setText("You attacked the "+monster.getMonsterName()+" and gave " + playerDamage + " damage");
+
+        monster.setMonHPts(monster.getMonHPts() - playerDamage);
+        monster.getMonHPts();
+
+        gs.btn1.setText(">");
+        gs.btn2.setText(" ");
+
+        if(monster.getMonHPts() >  0){
+            nextPosition1 = "bossAttack";
+            nextPosition2 = " ";
+        }
+        else if(monster.getMonHPts() < 1){
+            nextPosition1 = "win";
+            nextPosition2 = " ";
+        }
+    }
+
+    public void talkFight(){
+        f1boss.setWeakened(f1boss.getWeakened()+1);
+        gs.text.setText("You tried to talk with the "+monster.getMonsterName()+".");
+
+        f1boss.weakenedFormula(monster.getMonHPts(), monster.getMonMinDmg(), monster.getMonMaxDmg(), f1boss.getWeakened());
+
+        if(monster.getMonHPts() >  0){
+            nextPosition1 = "bossAttack";
+            nextPosition2 = " ";
+        }
+        else if(monster.getMonHPts() < 1){
+            nextPosition1 = "win";
+            nextPosition2 = " ";
+        }
+    }
+    public void bossAttack(){
+
+        Random roll = new Random();
+        int bossRoll = roll.nextInt(2);
+
+        if (bossRoll==0){
+            gc.bossDamage(monster.getMonMaxDmg(), monster.getMonMinDmg(), status.getArmor(), gs.text);
+        }else if(bossRoll==1){
+            gc.burnMagic(status.getArmor(), gs.text);
+        }
+
+
+        status.getHeroHPoints();
+        gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
+        gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
+
+        if (status.getHeroHPoints() > 0){
+            nextPosition1 = "bossFight";
+            nextPosition2 = " ";
+        }
+        else if (status.getHeroHPoints() < 1){
+            nextPosition1 = "lose";
+            nextPosition2 = " ";
+        }
 
     }
+
+
+
 }

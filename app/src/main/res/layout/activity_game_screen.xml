@@ -6,141 +6,144 @@
     android:layout_height="match_parent"
     tools:context=".view.GameScreen">
 
-    <TextView
-        android:id="@+id/storyText"
-        android:layout_width="250dp"
-        android:layout_height="101dp"
-        android:layout_marginTop="36dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/btnchoice01"
-        android:layout_width="300dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="180dp"
+        android:layout_width="141dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="120dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:onClick="btn1"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.133"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnchoice02"
-        android:layout_width="300dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="141dp"
+        android:layout_height="48dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:onClick="btn2"
         android:text="Button"
-        app:layout_constraintEnd_toEndOf="@+id/btnchoice01"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnchoice01"
-        app:layout_constraintTop_toBottomOf="@+id/btnchoice01" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnchoice01"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toEndOf="@+id/btnchoice01"
+        app:layout_constraintTop_toTopOf="@+id/btnchoice01"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnchoice03"
+        android:layout_width="141dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="64dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:onClick="btn1"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnchoice04"
+        android:layout_width="141dp"
+        android:layout_height="48dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:onClick="btn2"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="@+id/btnchoice03"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toEndOf="@+id/btnchoice03"
+        app:layout_constraintTop_toTopOf="@+id/btnchoice03"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/heroHPDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="324dp"
+        android:layout_marginBottom="696dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="Health:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/weaponDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="324dp"
-        android:text="Weapon:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.654"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/healthDisplay"
         android:layout_width="84dp"
         android:layout_height="20dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/heroHPDisplay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toEndOf="@+id/heroHPDisplay"
         app:layout_constraintTop_toTopOf="@+id/heroHPDisplay"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/weaponDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="660dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:text="Weapon:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/weapondisplayName"
         android:layout_width="84dp"
         android:layout_height="20dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="NaN"
         app:layout_constraintBottom_toBottomOf="@+id/weaponDisplay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.033"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/weaponDisplay"
         app:layout_constraintTop_toTopOf="@+id/weaponDisplay"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/statsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="4dp"
         android:onClick="viewHeroStats"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="Stats"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.015"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/itembtn1"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="272dp"
+        android:layout_marginBottom="216dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.099"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/weapon_sticksmall" />
 
-    <ImageButton
-        android:id="@+id/itembtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/itembtn1"
-        app:layout_constraintStart_toEndOf="@+id/itembtn1"
-        app:layout_constraintTop_toTopOf="@+id/itembtn1"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/weapon_sticksmall" />
-
-    <ImageButton
-        android:id="@+id/itembtn2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/itembtn1"
-        app:layout_constraintStart_toEndOf="@+id/itembtn1"
-        app:layout_constraintTop_toTopOf="@+id/itembtn1"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/weapon_sticksmall" />
-
     <TextView
         android:id="@+id/itemqty1"
         android:layout_width="44dp"
         android:layout_height="37dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/itembtn1"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="@+id/itembtn1"
         app:layout_constraintTop_toBottomOf="@+id/itembtn1" />
 
@@ -149,9 +152,64 @@
         android:layout_width="44dp"
         android:layout_height="37dp"
         android:gravity="center"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/itemqty1"
         app:layout_constraintEnd_toEndOf="@+id/itembtn"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/itembtn"
-        app:layout_constraintTop_toTopOf="@+id/itemqty1" />
+        app:layout_constraintTop_toTopOf="@+id/itemqty1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/storyText"
+        android:layout_width="333dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="396dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:shadowColor="@color/black"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.397"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/itembtn2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/itembtn1"
+        app:layout_constraintStart_toEndOf="@+id/itembtn1"
+        app:layout_constraintTop_toTopOf="@+id/itembtn1"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/weapon_sticksmall" />
+
+    <ImageButton
+        android:id="@+id/itembtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/itembtn1"
+        app:layout_constraintStart_toEndOf="@+id/itembtn1"
+        app:layout_constraintTop_toTopOf="@+id/itembtn1"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/weapon_sticksmall" />
+
+    <ProgressBar
+        android:id="@+id/hpBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="97dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="24dp"
+        android:min="0"
+        android:max="100"
+        app:layout_constraintBottom_toBottomOf="@+id/heroHPDisplay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/heroHPDisplay"
+        app:layout_constraintTop_toTopOf="@+id/heroHPDisplay"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

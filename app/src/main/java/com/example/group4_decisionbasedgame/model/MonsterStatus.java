@@ -41,7 +41,4 @@ public class MonsterStatus {
         this.monMaxDmg = monMaxDmg;
     }
 
-
-
-
 }
