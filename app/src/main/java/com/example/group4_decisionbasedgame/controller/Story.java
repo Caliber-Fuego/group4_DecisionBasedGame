@@ -100,9 +100,12 @@ public class Story {
 
         gs.btn1.setText("Open the Gate");
         gs.btn2.setText("Go back and sleep");
+        gs.btn3.setText("");
+        gs.btn4.setText("");
 
         nextPosition1 = "oldMan";
         nextPosition2 = "gameOver";
+
             //Directs the buttons to the next case
     }
 
@@ -145,10 +148,10 @@ public class Story {
 
 
         gs.btn1.setText("Fight");
-        gs.btn2.setText("Run");
+        gs.btn2.setText("");
 
         nextPosition1 = "playerAttack";
-        nextPosition2 = "getSword";
+        nextPosition2 = "";
     }
     public  void playerAttack(){
 
@@ -185,7 +188,7 @@ public class Story {
         gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
         gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
 
-        gs.btn1.setText(">");
+        gs.btn1.setText("Fight");
         gs.btn2.setText(" ");
 
         //Checks if Player HP is 0 or not, if not then moves to player's turn
@@ -228,7 +231,6 @@ public class Story {
         status.healHP(status.getHeroHPoints(), 40);
         gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
         gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
-
 
         roomRoll(gs.text);
     }
@@ -274,6 +276,15 @@ public class Story {
         gs.text.setText("You tried to talk with the "+monster.getMonsterName()+".");
 
         f1boss.weakenedFormula(monster.getMonHPts(), monster.getMonMinDmg(), monster.getMonMaxDmg(), f1boss.getWeakened());
+        if(f1boss.getWeakened() == 4){
+            gs.text.setText("He remembered the times before his death. \n" +
+                    "The times, he spent with you as a friend. \n" +
+                    "Just a little more now.");
+            f1boss.Monster_TrueFloor1Boss();
+        }
+
+        gs.btn1.setText(">");
+        gs.btn2.setText("");
 
         if(monster.getMonHPts() >  0){
             nextPosition1 = "bossAttack";
@@ -285,24 +296,24 @@ public class Story {
         }
     }
     public void bossAttack(){
-
         Random roll = new Random();
         int bossRoll = roll.nextInt(2);
-
         if (bossRoll==0){
-            gc.bossDamage(monster.getMonMaxDmg(), monster.getMonMinDmg(), status.getArmor(), gs.text);
+            f1boss.bossDamage(monster.getMonMaxDmg(), monster.getMonMinDmg(), status.getArmor(), gs.text);
         }else if(bossRoll==1){
-            gc.burnMagic(status.getArmor(), gs.text);
+            f1boss.burnMagic(status.getArmor(), gs.text);
         }
-
 
         status.getHeroHPoints();
         gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
         gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
 
+        gs.btn1.setText("Fight");
+        gs.btn2.setText("Talk");
+
         if (status.getHeroHPoints() > 0){
             nextPosition1 = "bossFight";
-            nextPosition2 = " ";
+            nextPosition2 = "talkFight";
         }
         else if (status.getHeroHPoints() < 1){
             nextPosition1 = "lose";

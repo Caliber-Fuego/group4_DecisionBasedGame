@@ -27,41 +27,6 @@ public class GameCalculations {
         return (randomizer.nextInt(maxDamage - minDamage) + minDamage) - (armor*10);
     }
 
-    public void bossDamage(int maxDamage, int minDamage, int armor, TextView text) {
-
-        if(this.curse==0){
-            int monsterDamage = (randomizer.nextInt(maxDamage - minDamage) + minDamage) - (armor*10);
-            status.setHeroHPoints(status.getHeroHPoints() - monsterDamage);
-            text.setText("The "+monster.getMonsterName()+" dealt "+monsterDamage+" damage to you \n " +
-                    "You are cursed!");
-            curse++;
-            }else if(this.curse > 0){
-            int cursedDamage = 2;
-            int monsterDamage = (randomizer.nextInt(maxDamage - minDamage) + minDamage) - (armor*10);
-            status.setHeroHPoints(status.getHeroHPoints() - (monsterDamage + cursedDamage));
-            text.setText("The "+monster.getMonsterName()+" dealt "+monsterDamage+" damage to you \n " +
-                    "The curse dealt "+cursedDamage+" damage to you!");
-            curse--;
-            }
-    }
-
-    public void burnMagic(int armor, TextView text){
-        if(this.burn==0){
-            int burnDamage = (randomizer.nextInt(30 - 25)+25)-(armor*10);
-            status.setHeroHPoints(status.getHeroHPoints() - burnDamage);
-            text.setText("The "+monster.getMonsterName()+" casted Burn and dealt "+burnDamage+" damage to you \n " +
-                    "You are burned!");
-            burn++;
-        }else if(this.burn > 0){
-            int burnDamage = (randomizer.nextInt(30 - 25)+25)-(armor*10);
-            int burned = 2;
-            status.setHeroHPoints(status.getHeroHPoints() - burnDamage);
-            status.setHeroHPoints(status.getHeroHPoints() - (burnDamage + burned));
-            text.setText("The "+monster.getMonsterName()+" casted Burn and dealt "+burnDamage+" damage to you \n " +
-                    "The burn dealt "+burned+" damage to you!");
-            burn--;
-        }
-    }
 
     public void itemRoll(TextView text, TextView itemqty1){
         Random roll = new Random();
