@@ -30,7 +30,6 @@ public class Monster_Floor1Boss extends MonsterStatus {
         monHPts = 650;
         monMinDmg = 30;
         monMaxDmg = 75;
-
     }
     public int getWeakened() {
         return Weakened;

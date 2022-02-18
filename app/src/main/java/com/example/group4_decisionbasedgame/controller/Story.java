@@ -2,6 +2,8 @@ package com.example.group4_decisionbasedgame.controller;
 
 import android.widget.TextView;
 
+import com.example.group4_decisionbasedgame.R;
+import com.example.group4_decisionbasedgame.model.values.items.item_hpBottle;
 import com.example.group4_decisionbasedgame.model.values.monster.Monster_Floor1Boss;
 import com.example.group4_decisionbasedgame.view.GameScreen;
 import com.example.group4_decisionbasedgame.view.HeroStats;
@@ -12,6 +14,7 @@ import com.example.group4_decisionbasedgame.model.PlayerStatus;
 import com.example.group4_decisionbasedgame.model.values.weapon.Weapon_Barehand;
 import com.example.group4_decisionbasedgame.model.values.weapon.Weapon_LongSword;
 
+import java.util.HashMap;
 import java.util.Random;
 
 public class Story {
@@ -20,16 +23,15 @@ public class Story {
     Items items;
     public String nextPosition1, nextPosition2, nextPosition3, nextPosition4;
 
-    //Lets Story call values from Player Status
+    //Lets Story call values from other classes
     PlayerStatus status = new PlayerStatus();
-
-    //Lets Story call values from Monster Status
     MonsterStatus monster = new MonsterStatus();
     Monster_Floor1Boss f1boss = new Monster_Floor1Boss();
-
     GameCalculations gc = new GameCalculations();
 
+    //States the counters for each one
     private int floorCounter = 0;
+    private int deathCounter = 0;
 
 
     //Allows Story class to access buttons and textviews from GameScreen
@@ -43,8 +45,11 @@ public class Story {
         switch(position){
             //cases for Story strings
             case "startingPoint": startingPoint(); break;
+            case "castleGate": castleGate(); break;
+            case "plainFields": plainFields(); break;
             case "gameOver": gameOver(); break;
             case "oldMan": oldMan(); break;
+            case "healOldMan": healOldMan(); break;
             case "getSword": getSword(); break;
             case "monsterEncounter": monsterEncounter(); break;
             case "playerAttack": playerAttack(); break;
@@ -84,54 +89,128 @@ public class Story {
         }
     }
 
-    public void defaultSetup(){
-        status = new Weapon_Barehand();
+    //Method for setting Texts
+    public void setTexts(String text1, String text2, String text3, String text4) {
+        gs.btn1.setText(text1);
+        gs.btn2.setText(text2);
+        gs.btn3.setText(text3);
+        gs.btn4.setText(text4);
     }
 
 
 
     public void startingPoint(){
             //sets text for the case "startingPoint"
-        gs.text.setText("You are at the Demon Lord Castle Gate.\n" +
-                        "what will you do?");
+        gs.image1.setImageResource(R.drawable.bg_castlegate);
+        if(deathCounter > 0){
+            gs.text.setText("You wake up infront of a castle Gate.\n" +
+                    "You also remember dying before this. \n" +
+                    "What will you do?");
+        }else {
+            gs.text.setText("You wake up infront of a castle Gate.\n" +
+                    "You also don't remember anything that happened before then \n" +
+                    "What will you do?");
+        }
+
         status.setHeroHPoints(100);
         gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
         gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
 
-        gs.btn1.setText("Open the Gate");
-        gs.btn2.setText("Go back and sleep");
-        gs.btn3.setText("");
-        gs.btn4.setText("");
+        setTexts("Open the Gate", "Examine the gate", "Look around", "Kill yourself.");
 
         nextPosition1 = "oldMan";
-        nextPosition2 = "gameOver";
+        nextPosition2 = "castleGate";
+        nextPosition3 = "plainFields";
+        nextPosition4 = "gameOver";
+            //Directs the buttons to the next method
+    }
 
-            //Directs the buttons to the next case
+    public void castleGate(){
+        gs.image1.setImageResource(R.drawable.bg_castlegate);
+        gs.text.setText("You examine the gate and find strange patterns on it \n" +
+                        "Otherwise, you find nothing else.\n" +
+                        "You felt a bit smarter.");
+        status.setINT(status.getINT()+1);
+
+        setTexts("Open the Gate", "", "", "Kill yourself.");
+
+        nextPosition1 = "oldMan";
+        nextPosition2 = "";
+        nextPosition3 = "";
+        nextPosition4 = "gameOver";
+
+    }
+
+    public void plainFields(){
+        gs.image1.setImageResource(R.drawable.bg_plains);
+
+        gs.text.setText("You look around and see a desolate wasteland full of nothing. \n" +
+                        "You do however, find a bottle full of red substance.");
+        items = new item_hpBottle();
+        items.setQuantity(items.getQuantity()+1);
+        gs.itemqty1.setText(String.valueOf(items.getQuantity()));
+
+        setTexts("Open the Gate", "", "", "Kill yourself.");
+
+        nextPosition1 = "oldMan";
+        nextPosition2 = "";
+        nextPosition3 = "";
+        nextPosition4 = "gameOver";
+
     }
 
     public void gameOver(){
-        gs.text.setText("You decide to give up on the quest and sleep.");
+        gs.text.setText("You died in the middle of the quest.");
+        deathCounter ++;
 
-        gs.btn1.setText("Start Over");
-        gs.btn2.setText("");
+        setTexts("Start Over", "", "", "");
 
         nextPosition1 = "startingPoint";
         nextPosition2 = "";
-
+        nextPosition3 = "";
+        nextPosition4 = "";
     }
     public void oldMan(){
-        gs.text.setText("You encounter an old man wearing a robe.\n" +
-                        "'It's dangerous to go alone, take this.'\n \n" +
-                        "He hands you over a sword, do you accept?");
+        gs.image1.setImageResource(R.drawable.bg_oldman);
+        gs.text.setText("You encounter an old man lying on the ground\n" +
+                        "He also has a sword right beside him\n" +
+                        "What will you do?");
+        items = new item_hpBottle();
 
+        if(items.getQuantity()>0){
+            gs.btn2.setText("Use bottle on him.");
+        }else{
+            gs.btn2.setText("");
+        }
         gs.btn1.setText("Take the Sword");
-        gs.btn2.setText("Go back outside");
+        gs.btn3.setText("");
+        gs.btn4.setText("Go back outside");
+
 
         nextPosition1 = "getSword";
-        nextPosition2 = "startingPoint";
+        if(items.getQuantity()>0){
+            nextPosition2 = "healOldMan";
+        }else{
+            nextPosition2 = "";
+        }
+        nextPosition3 = "";
+        nextPosition4 = "startingPoint";
+    }
+    public void healOldMan(){
+        gs.text.setText("'Ahh, I nearly died there! Be careful, there are monsters up ahead.' \n" +
+                        "'Here, have my sword.. I'll also bless you while i'm at it.' \n" +
+                        "You felt a bit more powerful.");
+        status.setSTR(status.getSTR()+5);
+
+        setTexts("Take the Sword", "", "", "Go back");
+
+        nextPosition1 = "getSword";
+        nextPosition2 = "";
+        nextPosition3 = "";
+        nextPosition4 = "startingPoint";
     }
     public void getSword(){
-        gs.text.setText("Good luck young man on your quest");
+        gs.text.setText("You continued on and find a dark cave.");
         status = new Weapon_LongSword();
         gs.wpntxt.setText(status.name);
         status.addDamage(status.damage, status.getHeroMinDamage(), status.getHeroMaxDamage());
@@ -214,6 +293,7 @@ public class Story {
 
     public void lose (){
         gs.text.setText("You lost");
+        deathCounter++;
 
         gs.btn1.setText("Start Over");
         gs.btn2.setText(" ");
@@ -321,7 +401,4 @@ public class Story {
         }
 
     }
-
-
-
 }

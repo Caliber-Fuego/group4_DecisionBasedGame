@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -18,13 +19,12 @@ import com.example.group4_decisionbasedgame.model.PlayerStatus;
 import com.example.group4_decisionbasedgame.model.values.items.item_hpBottle;
 import com.example.group4_decisionbasedgame.model.values.weapon.Weapon_Barehand;
 
-import org.w3c.dom.Text;
-
 public class GameScreen extends AppCompatActivity implements View.OnClickListener {
 
     public TextView text, hptext, wpntxt, itemqty1;
     public Button btn1, btn2, btn3, btn4, statsbtn;
     public ImageButton itembtn1;
+    public ImageView image1;
     public ProgressBar healthbar;
 
     //Allows GameScreen class to call strings from Story class
@@ -46,6 +46,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
 
+
         //XML ids for texts and buttons
         text = (TextView)findViewById(R.id.storyText);
         hptext = (TextView)findViewById(R.id.healthDisplay);
@@ -58,6 +59,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         btn3 = (Button) findViewById(R.id.btnchoice03);
         btn4 = (Button) findViewById(R.id.btnchoice04);
         itembtn1 = (ImageButton) findViewById(R.id.itembtn1);
+        image1 = (ImageView)findViewById(R.id.bgimg);
 
         //The starting point of the game
         story.startingPoint();
@@ -105,4 +107,5 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                 break;
         }
     }
+
 }

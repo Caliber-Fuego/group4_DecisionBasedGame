@@ -6,11 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".view.GameScreen">
 
+
+    <ImageView
+        android:id="@+id/bgimg"
+        android:layout_width="382dp"
+        android:layout_height="517dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bg_castlegate" />
+
+    <ImageView
+        android:id="@+id/userinterface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/complete" />
+
     <Button
         android:id="@+id/btnchoice01"
         android:layout_width="141dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="160dp"
         android:fontFamily="@font/perfect_dosvga437"
         android:onClick="btn1"
         android:text="Button"
@@ -37,9 +61,9 @@
         android:id="@+id/btnchoice03"
         android:layout_width="141dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="112dp"
         android:fontFamily="@font/perfect_dosvga437"
-        android:onClick="btn1"
+        android:onClick="btn3"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,8 +74,9 @@
         android:id="@+id/btnchoice04"
         android:layout_width="141dp"
         android:layout_height="48dp"
+        android:layout_centerInParent="true"
         android:fontFamily="@font/perfect_dosvga437"
-        android:onClick="btn2"
+        android:onClick="btn4"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="@+id/btnchoice03"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,15 +87,17 @@
 
     <TextView
         android:id="@+id/heroHPDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="696dp"
+        android:layout_width="56dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="700dp"
         android:fontFamily="@font/perfect_dosvga437"
         android:text="Health:"
+        android:textColor="#FFFFFF"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/healthDisplay"
@@ -78,31 +105,40 @@
         android:layout_height="20dp"
         android:fontFamily="@font/perfect_dosvga437"
         android:text="TextView"
+        android:textColor="#FFFFFF"
+
         app:layout_constraintBottom_toBottomOf="@+id/heroHPDisplay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintHorizontal_bias="0.093"
         app:layout_constraintStart_toEndOf="@+id/heroHPDisplay"
         app:layout_constraintTop_toTopOf="@+id/heroHPDisplay"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
+
 
     <TextView
         android:id="@+id/weaponDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="660dp"
         android:fontFamily="@font/perfect_dosvga437"
         android:text="Weapon:"
+        android:textColor="#FFFFFF"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.278"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13999999"
+        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/weapondisplayName"
-        android:layout_width="84dp"
-        android:layout_height="20dp"
+        android:layout_width="107dp"
+        android:layout_height="33dp"
         android:fontFamily="@font/perfect_dosvga437"
         android:text="NaN"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/weaponDisplay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -114,37 +150,37 @@
         android:id="@+id/statsButton"
         android:layout_width="88dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="4dp"
-        android:onClick="viewHeroStats"
+        android:layout_marginBottom="64dp"
         android:fontFamily="@font/perfect_dosvga437"
+        android:onClick="viewHeroStats"
         android:text="Stats"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/itembtn1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="216dp"
+        android:layout_width="36dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="250dp"
+        android:background="#0000"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/hpbottle"
-        android:scaleType="fitXY"
-        android:background="#0000"/>
-
+        app:srcCompat="@drawable/hpbottle" />
 
     <TextView
         android:id="@+id/itemqty1"
         android:layout_width="44dp"
         android:layout_height="37dp"
         android:layout_marginTop="8dp"
-        android:gravity="center"
         android:fontFamily="@font/perfect_dosvga437"
+        android:gravity="center"
         android:text="TextView"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/itembtn1"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="@+id/itembtn1"
@@ -154,9 +190,10 @@
         android:id="@+id/itemqty2"
         android:layout_width="44dp"
         android:layout_height="37dp"
-        android:gravity="center"
         android:fontFamily="@font/perfect_dosvga437"
-        android:text="TextView"
+        android:gravity="center"
+        android:text="NaN"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/itemqty1"
         app:layout_constraintEnd_toEndOf="@+id/itembtn"
         app:layout_constraintHorizontal_bias="0.0"
@@ -166,35 +203,30 @@
 
     <TextView
         android:id="@+id/storyText"
-        android:layout_width="333dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="396dp"
+        android:layout_width="335dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="420dp"
         android:fontFamily="@font/perfect_dosvga437"
         android:shadowColor="@color/black"
         android:text="TextView"
         android:textColor="#FFFFFF"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.397"
+        app:layout_constraintHorizontal_bias="0.552"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/itembtn2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/itembtn1"
-        app:layout_constraintStart_toEndOf="@+id/itembtn1"
-        app:layout_constraintTop_toTopOf="@+id/itembtn1"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/weapon_sticksmall" />
-
-    <ImageButton
         android:id="@+id/itembtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
+        android:layout_width="36dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="20dp"
+        android:background="#0000"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@+id/itembtn1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toEndOf="@+id/itembtn1"
         app:layout_constraintTop_toTopOf="@+id/itembtn1"
         app:layout_constraintVertical_bias="0.0"
@@ -206,13 +238,15 @@
         android:layout_width="97dp"
         android:layout_height="19dp"
         android:layout_marginStart="24dp"
-        android:min="0"
         android:max="100"
+        android:min="0"
         app:layout_constraintBottom_toBottomOf="@+id/heroHPDisplay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/heroHPDisplay"
         app:layout_constraintTop_toTopOf="@+id/heroHPDisplay"
         app:layout_constraintVertical_bias="0.0" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
