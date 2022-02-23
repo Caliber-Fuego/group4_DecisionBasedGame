@@ -1,8 +1,5 @@
 package com.example.group4_decisionbasedgame.view;
 
-import static com.example.group4_decisionbasedgame.R.id.invSlot1;
-import static com.example.group4_decisionbasedgame.R.id.invSlot4;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -12,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.group4_decisionbasedgame.R;
+import com.example.group4_decisionbasedgame.controller.Story;
 import com.example.group4_decisionbasedgame.model.Items;
 import com.example.group4_decisionbasedgame.model.PlayerStatus;
 import com.example.group4_decisionbasedgame.model.values.items.item_hpBottle;
@@ -19,12 +17,12 @@ import com.example.group4_decisionbasedgame.model.values.items.item_hpBottle;
 public class HeroStats extends AppCompatActivity implements View.OnClickListener{
 
     Items items = new Items();
-    TextView txtHeroHp, txtWeapon, txtMinDmg, txthpBottle, txtArmor;
+    TextView txtHeroHp, txtWeapon, txtMinDmg, txthpBottle, txtArmor, txtSTR, txtINT, txtCHR, txtDeath, txtBattle;
     Button backButton;
-    public ImageButton slot1, slot4;
 
     //Lets the activity call values from PlayerStatus
     PlayerStatus status = new PlayerStatus();
+    Story story = new Story(this);
 
 
     @Override
@@ -36,26 +34,29 @@ public class HeroStats extends AppCompatActivity implements View.OnClickListener
         txtHeroHp = findViewById(R.id.heroHP);
         txtWeapon = findViewById(R.id.weaponName);
         txtMinDmg = findViewById(R.id.minDmg);
-        txthpBottle = findViewById(R.id.hpbottleamt);
         txtArmor = findViewById(R.id.armornmbr);
-
+        txtSTR = findViewById(R.id.strnmbr);
+        txtINT = findViewById(R.id.intnmbr);
+        txtCHR = findViewById(R.id.chrnmbr);
+        txtDeath = findViewById(R.id.deathnmbr);
+        txtBattle = findViewById(R.id.battlenmbr);
         backButton = findViewById(R.id.backButton);
 
-        slot1 = findViewById(invSlot1);
-        slot4 = findViewById(invSlot4);
 
 
         //Calls values from PlayerStatus
         txtHeroHp.setText(String.valueOf(status.getHeroHPoints() +"/"  +status.getMaxheroHPoints()));
         txtMinDmg.setText(String.valueOf(status.getHeroMinDamage() +" - "+status.getHeroMaxDamage()));
         txtArmor.setText(String.valueOf(status.getArmor()));
+        txtSTR.setText(String.valueOf(status.getSTR()));
+        txtINT.setText(String.valueOf(status.getINT()));
+        txtCHR.setText(String.valueOf(status.getCHR()));
+        txtDeath.setText(String.valueOf(story.getDeathCounter()));
+        txtBattle.setText(String.valueOf(story.getBattleCounter()));
+
         txtWeapon.setText(status.name);
-        txthpBottle.setText(String.valueOf(items.getQuantity()));
 
-
-        //Sets onclicklisteners for the buttons
-        slot1.setOnClickListener(this);
-        slot4.setOnClickListener(this);
+        //On Click Listeners
         backButton.setOnClickListener(this);
     }
 

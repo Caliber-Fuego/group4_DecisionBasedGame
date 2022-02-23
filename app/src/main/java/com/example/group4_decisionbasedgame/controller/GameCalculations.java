@@ -20,8 +20,8 @@ public class GameCalculations {
     Random roll = new Random();
 
     //Method for the damage calculation
-    public int baseDamage(int minDamage, int maxDamage, int armor) {
-        return (randomizer.nextInt(maxDamage - minDamage) + minDamage) - (armor*10);
+    public int baseDamage(int minDamage, int maxDamage, int str, int armor) {
+        return (randomizer.nextInt((maxDamage + str ) - (minDamage + str)) + (minDamage+str)) - (armor*10);
     }
 
 

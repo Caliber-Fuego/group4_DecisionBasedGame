@@ -31,7 +31,7 @@ public class Monster_Floor1Boss extends MonsterStatus {
     //Boss' Stats
     public Monster_Floor1Boss(){
         monsterName = "Cursed Knight";
-        monHPts = 650;
+        monHPts = 800;
         monMinDmg = 30;
         monMaxDmg = 75;
     }

@@ -29,11 +29,41 @@ public class Story {
     GameCalculations gc = new GameCalculations();
 
 
-    //States the counters for each one
-    private int floorCounter = 0;
-    private int deathCounter = 0;
-    private int battleCounter= 0;
-    private int dcounter = 0;
+    //Story counters
+    private static int floorCounter = 0;
+    private static int deathCounter = 0;
+    private static int battleCounter= 0;
+    private static int dcounter = 0;
+
+    //Getters for story values
+    public int getFloorCounter() {
+        return floorCounter;
+    }
+
+    public int getDeathCounter() {
+        return deathCounter;
+    }
+
+    public int getBattleCounter() {
+        return battleCounter;
+    }
+
+    public int getDcounter() {
+        return dcounter;
+    }
+
+    //Setters for Story Values
+    public static void setFloorCounter(int floorCounter) {
+        Story.floorCounter = floorCounter;
+    }
+
+    public static void setDeathCounter(int deathCounter) {
+        Story.deathCounter = deathCounter;
+    }
+
+    public static void setBattleCounter(int battleCounter) {
+        Story.battleCounter = battleCounter;
+    }
 
     public void setDcounter(int dcounter) {
         this.dcounter = dcounter;
@@ -44,6 +74,7 @@ public class Story {
 
     //Allows Story class to access buttons and textviews from GameScreen
     public Story(GameScreen gs){this.gs = gs;}
+    public Story(HeroStats hs) {this.hs = hs;}
 
 
 
@@ -190,7 +221,8 @@ public class Story {
 
     public void gameOver(){
         gs.text.setText("You died in the middle of the quest.");
-        deathCounter ++;
+        deathCounter++;
+        this.getDeathCounter();
 
         setTexts("Start Over", "", "", "");
 
@@ -267,7 +299,7 @@ public class Story {
     public  void playerAttack(){
 
         //Calculates Player Damage to the Monster
-        int playerDamage = gc.baseDamage(status.getHeroMinDamage(), status.getHeroMaxDamage(),0);
+        int playerDamage = gc.baseDamage(status.getHeroMinDamage(), status.getHeroMaxDamage(),status.getSTR(), 0);
         gs.text.setText("You attacked the monster and gave " + playerDamage + " damage");
 
         monster.setMonHPts(monster.getMonHPts() - playerDamage);
@@ -291,7 +323,7 @@ public class Story {
     public void monsterAttack(){
 
     //Calculates Monster Damage to the Player
-        int monsterDamage = gc.baseDamage(monster.getMonMinDmg(),monster.getMonMaxDmg(),status.getArmor());
+        int monsterDamage = gc.baseDamage(monster.getMonMinDmg(),monster.getMonMaxDmg(), status.getSTR(), status.getArmor());
         gs.text.setText("The "+monster.getMonsterName()+" dealt "+monsterDamage+" damage to you");
 
         status.setHeroHPoints(status.getHeroHPoints() - monsterDamage);
@@ -381,7 +413,7 @@ public class Story {
         nextPosition2 = "talkFight";
     }
     public void bossFight(){
-        int playerDamage = gc.baseDamage(status.getHeroMinDamage(), status.getHeroMaxDamage(),0);
+        int playerDamage = gc.baseDamage(status.getHeroMinDamage(), status.getHeroMaxDamage(), status.getSTR(), 0);
         gs.text.setText("You attacked the "+monster.getMonsterName()+" and gave " + playerDamage + " damage");
 
         monster.setMonHPts(monster.getMonHPts() - playerDamage);

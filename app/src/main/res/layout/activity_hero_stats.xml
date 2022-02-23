@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="Hero"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.251"
@@ -22,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:onClick="onClick"
         android:text="@string/back_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="Health:"
         app:layout_constraintEnd_toEndOf="@+id/Hero"
         app:layout_constraintStart_toStartOf="@+id/Hero"
@@ -44,6 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="112dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="NaN"
         app:layout_constraintBottom_toBottomOf="@+id/healthName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="Weapon:"
         app:layout_constraintEnd_toEndOf="@+id/healthName"
         app:layout_constraintHorizontal_bias="1.0"
@@ -68,7 +73,68 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="124dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="Damage:"
+        app:layout_constraintEnd_toEndOf="@+id/healthName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/healthName"
+        app:layout_constraintTop_toBottomOf="@+id/healthName" />
+
+    <TextView
+        android:id="@+id/strDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:text="STR:"
+        app:layout_constraintEnd_toEndOf="@+id/healthName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/healthName"
+        app:layout_constraintTop_toBottomOf="@+id/healthName" />
+
+    <TextView
+        android:id="@+id/intDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="192dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:text="INT:"
+        app:layout_constraintEnd_toEndOf="@+id/healthName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/healthName"
+        app:layout_constraintTop_toBottomOf="@+id/healthName" />
+
+    <TextView
+        android:id="@+id/chrDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:text="CHR:"
+        app:layout_constraintEnd_toEndOf="@+id/healthName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/healthName"
+        app:layout_constraintTop_toBottomOf="@+id/healthName" />
+
+    <TextView
+        android:id="@+id/deathDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="248dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:text="Deaths:"
+        app:layout_constraintEnd_toEndOf="@+id/healthName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/healthName"
+        app:layout_constraintTop_toBottomOf="@+id/healthName" />
+
+    <TextView
+        android:id="@+id/battleDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="276dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:text="Battles:"
         app:layout_constraintEnd_toEndOf="@+id/healthName"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/healthName"
@@ -79,6 +145,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="84dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="Armor:"
         app:layout_constraintEnd_toEndOf="@+id/healthName"
         app:layout_constraintHorizontal_bias="0.916"
@@ -90,6 +157,67 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="124dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:text="NaN"
+        app:layout_constraintEnd_toEndOf="@+id/weaponName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/weaponName"
+        app:layout_constraintTop_toBottomOf="@+id/heroHP" />
+
+    <TextView
+        android:id="@+id/strnmbr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:text="NaN"
+        app:layout_constraintEnd_toEndOf="@+id/weaponName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/weaponName"
+        app:layout_constraintTop_toBottomOf="@+id/heroHP" />
+
+    <TextView
+        android:id="@+id/intnmbr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="192dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:text="NaN"
+        app:layout_constraintEnd_toEndOf="@+id/weaponName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/weaponName"
+        app:layout_constraintTop_toBottomOf="@+id/heroHP" />
+
+    <TextView
+        android:id="@+id/chrnmbr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:text="NaN"
+        app:layout_constraintEnd_toEndOf="@+id/weaponName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/weaponName"
+        app:layout_constraintTop_toBottomOf="@+id/heroHP" />
+
+    <TextView
+        android:id="@+id/deathnmbr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="248dp"
+        android:fontFamily="@font/perfect_dosvga437"
+        android:text="NaN"
+        app:layout_constraintEnd_toEndOf="@+id/weaponName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/weaponName"
+        app:layout_constraintTop_toBottomOf="@+id/heroHP" />
+
+    <TextView
+        android:id="@+id/battlenmbr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="276dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="NaN"
         app:layout_constraintEnd_toEndOf="@+id/weaponName"
         app:layout_constraintHorizontal_bias="0.0"
@@ -101,6 +229,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="84dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="NaN"
         app:layout_constraintEnd_toEndOf="@+id/weaponName"
         app:layout_constraintHorizontal_bias="0.0"
@@ -112,42 +241,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:fontFamily="@font/perfect_dosvga437"
         android:text="NaN"
         app:layout_constraintEnd_toEndOf="@+id/heroHP"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="@+id/heroHP"
         app:layout_constraintTop_toBottomOf="@+id/heroHP" />
-
-    <ImageButton
-        android:id="@+id/invSlot1"
-        android:layout_width="46dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="84dp"
-        android:onClick="onClick"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.687"
-        app:srcCompat="@drawable/weapon_sticksmall" />
-
-    <ImageButton
-        android:id="@+id/invSlot4"
-        android:layout_width="46dp"
-        android:layout_height="47dp"
-        android:onClick="onClick"
-        app:layout_constraintBottom_toBottomOf="@+id/invSlot1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/invSlot1"
-        app:layout_constraintTop_toTopOf="@+id/invSlot1"
-        app:srcCompat="@drawable/weapon_sticksmall" />
-
-    <TextView
-        android:id="@+id/hpbottleamt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/invSlot1"
-        app:layout_constraintStart_toStartOf="@+id/invSlot1"
-        app:layout_constraintTop_toBottomOf="@+id/invSlot1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

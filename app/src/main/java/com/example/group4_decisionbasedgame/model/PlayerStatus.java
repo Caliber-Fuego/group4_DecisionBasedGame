@@ -60,12 +60,10 @@ public class PlayerStatus {
         return heroHPoints;
     }
     public int getHeroMinDamage() {
-        PlayerStatus.heroMinDamage += (STR*2);
         return heroMinDamage;
     }
 
     public int getHeroMaxDamage() {
-        PlayerStatus.heroMaxDamage += (STR*2);
         return heroMaxDamage;
     }
 
@@ -93,6 +91,7 @@ public class PlayerStatus {
     public void addDamage(int damage, int heroMinDamage, int heroMaxDamage) {
         PlayerStatus.heroMinDamage = damage + heroMinDamage;
         PlayerStatus.heroMaxDamage = damage + heroMaxDamage;
+        return;
     }
 
     //adds a percent of player HP
