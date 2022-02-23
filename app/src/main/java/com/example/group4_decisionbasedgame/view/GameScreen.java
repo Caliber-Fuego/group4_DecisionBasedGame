@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -75,6 +76,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         itembtn1.setOnClickListener(this);
 
     }
+
+
         //Runs the code to move on to the case placed in the button
     public void btn1 (View view){story.selectPosition(story.nextPosition1);}
     public void btn2 (View view){story.selectPosition(story.nextPosition2);}
@@ -95,6 +98,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.itembtn1:
+                //The code for the item button to allow it to run or be disabled
                 if(item.getQuantity()>0){
                     status.healHP(status.getHeroHPoints(), item.getHeal());
                     item.setQuantity(item.getQuantity()-1);

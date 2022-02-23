@@ -7,26 +7,24 @@ public class Items {
     protected static int quantity = 0;
 
 
+    //Getters
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getHeal() {
         return heal;
     }
-
-    public void setHeal(int heal) {
-        this.heal = heal;
-    }
-
     public int getQuantity() {
         return quantity;
     }
 
+    //Setters
+    public void setHeal(int heal) {
+        this.heal = heal;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
     public void setQuantity(int quantity) {
         Items.quantity = quantity;
     }

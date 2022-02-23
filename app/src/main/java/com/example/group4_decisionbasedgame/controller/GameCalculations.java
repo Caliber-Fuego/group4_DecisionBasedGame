@@ -12,13 +12,10 @@ import com.example.group4_decisionbasedgame.view.GameScreen;
 
 public class GameCalculations {
 
+    //Lets the class use data from other classes
     Items items = new Items();
     PlayerStatus status = new PlayerStatus();
     MonsterStatus monster = new MonsterStatus();
-
-    int curse = 0;
-    int burn = 0;
-
     Random randomizer = new Random();
     Random roll = new Random();
 
@@ -28,6 +25,7 @@ public class GameCalculations {
     }
 
 
+    //Method for Item Randomization
     public void itemRoll(TextView text, TextView itemqty1){
         Random roll = new Random();
 
