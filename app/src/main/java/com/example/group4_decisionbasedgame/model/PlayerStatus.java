@@ -56,7 +56,6 @@ public class PlayerStatus {
     }
 
     //Getters for int values
-
     public int getHeroHPoints() {
         return heroHPoints;
     }
@@ -97,7 +96,6 @@ public class PlayerStatus {
     }
 
     //adds a percent of player HP
-
     public void healHP(int heroHPoints, int healamt) {
         //PlayerStatus.heroHPoints = Math.min(heroHPoints + (int) (heroHPoints * (healamt/100.0f)), 100);
         PlayerStatus.heroHPoints = Math.min(heroHPoints + healamt, 100);

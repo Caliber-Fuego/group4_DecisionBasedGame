@@ -5,16 +5,15 @@ import android.widget.TextView;
 import com.example.group4_decisionbasedgame.R;
 import com.example.group4_decisionbasedgame.model.values.items.item_hpBottle;
 import com.example.group4_decisionbasedgame.model.values.monster.Monster_Floor1Boss;
+import com.example.group4_decisionbasedgame.model.values.monster.Monster_Soldier;
 import com.example.group4_decisionbasedgame.view.GameScreen;
 import com.example.group4_decisionbasedgame.view.HeroStats;
 import com.example.group4_decisionbasedgame.model.Items;
 import com.example.group4_decisionbasedgame.model.values.monster.Monster_Slime;
 import com.example.group4_decisionbasedgame.model.MonsterStatus;
 import com.example.group4_decisionbasedgame.model.PlayerStatus;
-import com.example.group4_decisionbasedgame.model.values.weapon.Weapon_Barehand;
 import com.example.group4_decisionbasedgame.model.values.weapon.Weapon_LongSword;
 
-import java.util.HashMap;
 import java.util.Random;
 
 public class Story {
@@ -29,9 +28,18 @@ public class Story {
     Monster_Floor1Boss f1boss = new Monster_Floor1Boss();
     GameCalculations gc = new GameCalculations();
 
+
     //States the counters for each one
     private int floorCounter = 0;
     private int deathCounter = 0;
+    private int battleCounter= 0;
+    private int dcounter = 0;
+
+    public void setDcounter(int dcounter) {
+        this.dcounter = dcounter;
+    }
+
+
 
 
     //Allows Story class to access buttons and textviews from GameScreen
@@ -62,6 +70,27 @@ public class Story {
             case "bossFight": bossFight(); break;
             case "bossAttack": bossAttack(); break;
             case "talkFight": talkFight(); break;
+            case "memory1": memory1(); break;
+
+            //Dialogue Case
+            case "memoryd1":
+                if (dcounter==0) {
+                    gs.text.setText("You look around and see thousands of soldiers, fighting each other." +
+                                    " You realize that you are wearing the same uniform as one of the soldiers." +
+                                    " It seems like you are in a war.");
+                    dcounter++;
+                }else if (dcounter==1){
+                    gs.text.setText("You have no clue which kingdom these uniforms belong to, nor" +
+                                    " do you know why they are fighting.");
+                    dcounter++;
+                }else if (dcounter==2){
+                    gs.text.setText("What you do know however, is that you must fight and survive");
+                    dcounter++;
+                }else if (dcounter==3) {
+                    gs.text.setText("The memory ends there.");
+                    nextPosition1 = "win";
+                }
+                break;
         }
     }
 
@@ -209,8 +238,10 @@ public class Story {
         nextPosition3 = "";
         nextPosition4 = "startingPoint";
     }
+
     public void getSword(){
         gs.text.setText("You continued on and find a dark cave.");
+        gs.image1.setImageResource(R.drawable.bg_cave);
         status = new Weapon_LongSword();
         gs.wpntxt.setText(status.name);
         status.addDamage(status.damage, status.getHeroMinDamage(), status.getHeroMaxDamage());
@@ -223,6 +254,7 @@ public class Story {
         }
     public  void monsterEncounter() {
         monster = new Monster_Slime();
+        gs.image1.setImageResource(R.drawable.monster_slime);
         gs.text.setText("A " + monster.getMonsterName() + " attacks you! \n\n What do you do?");
 
 
@@ -284,11 +316,28 @@ public class Story {
 
     public void win(){
         gs.text.setText("You beat the monster!");
+        gs.image1.setImageResource(R.drawable.bg_cave);
+        battleCounter++;
 
         gs.btn1.setText("Continue");
         gs.btn2.setText("");
 
-        roomRoll(gs.text);
+        if (battleCounter==1){
+            nextPosition1 = "memory1";
+        }else {
+            roomRoll(gs.text);
+        }
+
+    }
+
+    public void memory1(){
+        gs.text.setText("You remember a memory from the old times.");
+        gs.image1.setImageResource(R.drawable.bg_war);
+        setDcounter(0);
+        setTexts("Continue", "", "", "");
+
+        nextPosition1 = "memoryd1";
+
     }
 
     public void lose (){
