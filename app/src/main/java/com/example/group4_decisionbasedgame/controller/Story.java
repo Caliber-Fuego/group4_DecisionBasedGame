@@ -3,6 +3,7 @@ package com.example.group4_decisionbasedgame.controller;
 import android.widget.TextView;
 
 import com.example.group4_decisionbasedgame.R;
+import com.example.group4_decisionbasedgame.model.Dialogues;
 import com.example.group4_decisionbasedgame.model.values.items.item_hpBottle;
 import com.example.group4_decisionbasedgame.model.values.monster.Monster_Floor1Boss;
 import com.example.group4_decisionbasedgame.model.values.monster.Monster_Soldier;
@@ -27,27 +28,30 @@ public class Story {
     MonsterStatus monster = new MonsterStatus();
     Monster_Floor1Boss f1boss = new Monster_Floor1Boss();
     GameCalculations gc = new GameCalculations();
+    Dialogues dlg = new Dialogues();
 
 
     //Story counters
+    private int memoryCounter = 0;
     private static int floorCounter = 0;
     private static int deathCounter = 0;
     private static int battleCounter= 0;
     private static int dcounter = 0;
 
+    //Story booleans
+    boolean dlog = false;
+    boolean shkey = false;
+
     //Getters for story values
     public int getFloorCounter() {
         return floorCounter;
     }
-
     public int getDeathCounter() {
         return deathCounter;
     }
-
     public int getBattleCounter() {
         return battleCounter;
     }
-
     public int getDcounter() {
         return dcounter;
     }
@@ -56,27 +60,19 @@ public class Story {
     public static void setFloorCounter(int floorCounter) {
         Story.floorCounter = floorCounter;
     }
-
     public static void setDeathCounter(int deathCounter) {
         Story.deathCounter = deathCounter;
     }
-
     public static void setBattleCounter(int battleCounter) {
         Story.battleCounter = battleCounter;
     }
-
     public void setDcounter(int dcounter) {
         this.dcounter = dcounter;
     }
 
-
-
-
     //Allows Story class to access buttons and textviews from GameScreen
     public Story(GameScreen gs){this.gs = gs;}
     public Story(HeroStats hs) {this.hs = hs;}
-
-
 
     public void selectPosition(String position){
     //Allows the cases to be accessible by the buttons
@@ -102,27 +98,76 @@ public class Story {
             case "bossAttack": bossAttack(); break;
             case "talkFight": talkFight(); break;
             case "memory1": memory1(); break;
+            case "memory2": memory2(); break;
+            case "m2GeneralRoom": m2GeneralRoom(); break;
+            case "m2roomChest": m2roomChest(); break;
+            case "m2roomCloset": m2roomCloset(); break;
+            case "m2roomTable": m2roomTable(); break;
+            case "apothecary": apothecary(); break;
+            case "strengthBrew": strengthBrew(); break;
+            case "charismaBrew": charismaBrew(); break;
+            case "healthBrew": healthBrew(); break;
+            case "m2Door": m2Door(); break;
 
-            //Dialogue Case
+            //Dialogue Cases
             case "memoryd1":
                 if (dcounter==0) {
-                    gs.text.setText("You look around and see thousands of soldiers, fighting each other." +
-                                    " You realize that you are wearing the same uniform as one of the soldiers." +
-                                    " It seems like you are in a war.");
+                    gs.text.setText(dlg.M1_1);
                     dcounter++;
                 }else if (dcounter==1){
-                    gs.text.setText("You have no clue which kingdom these uniforms belong to, nor" +
-                                    " do you know why they are fighting.");
+                    gs.text.setText(dlg.M1_2);
                     dcounter++;
                 }else if (dcounter==2){
-                    gs.text.setText("What you do know however, is that you must fight and survive");
+                    gs.text.setText(dlg.M1_3);
                     dcounter++;
                 }else if (dcounter==3) {
-                    gs.text.setText("The memory ends there.");
-                    nextPosition1 = "win";
+                    gs.text.setText(dlg.M1_4);
+                    memoryCounter++;
+                    roomRoll(gs.text);
                 }
                 break;
-        }
+            case "memoryd2":
+                if (dcounter==0){
+                    gs.text.setText(dlg.M2_1);
+                    dcounter++;
+                }else if (dcounter==1){
+                    gs.text.setText(dlg.M2_2);
+                    gs.image1.setImageResource(R.drawable.bg_strongholdoor);
+                    setTexts("Open the door", "Go to a Room", "Go to Potion Lab", "Break down the Door");
+                    nextPosition1 = " ";
+                    nextPosition2 = "m2GeneralRoom";
+                    nextPosition3 = "apothecary";
+                    nextPosition4 = " ";
+
+                    if (shkey=true) {
+                        nextPosition1 = "m2Door";
+                    }
+                    if (status.getSTR()==10);
+                    nextPosition4 = "m2Door";
+                }
+                break;
+
+            case "memoryd2_1":
+                if (dcounter==0){
+                    gs.text.setText(dlg.M2_6);
+                    gs.btn1.setText("Let's stop.");
+                    dcounter++;
+                }else if (dcounter==1){
+                    gs.text.setText(dlg.M2_7);
+                    gs.image1.setImageResource(R.drawable.bg_room2);
+                    gs.btn1.setText("I'll pay you more.");
+                    dcounter++;
+                }else if (dcounter==2){
+                    gs.text.setText(dlg.M2_8);
+                    gs.image1.setImageResource(R.drawable.bg_room3);
+                    gs.btn1.setText("Continue");
+                    dcounter++;
+                }else if (dcounter==3){
+                    gs.text.setText("The memory ends there");
+                    memoryCounter++;
+                    roomRoll(gs.text);
+                }
+            }
     }
 
     //Rolls from 1 - 3 and then moves on to the assigned method
@@ -289,12 +334,12 @@ public class Story {
         gs.image1.setImageResource(R.drawable.monster_slime);
         gs.text.setText("A " + monster.getMonsterName() + " attacks you! \n\n What do you do?");
 
-
-        gs.btn1.setText("Fight");
-        gs.btn2.setText("");
+        setTexts("Fight", " ", " ", " ");
 
         nextPosition1 = "playerAttack";
         nextPosition2 = "";
+        nextPosition3 = "";
+        nextPosition4 = "";
     }
     public  void playerAttack(){
 
@@ -356,6 +401,8 @@ public class Story {
 
         if (battleCounter==1){
             nextPosition1 = "memory1";
+        }else if (battleCounter==2){
+            nextPosition1 = "memory2";
         }else {
             roomRoll(gs.text);
         }
@@ -369,8 +416,168 @@ public class Story {
         setTexts("Continue", "", "", "");
 
         nextPosition1 = "memoryd1";
+        nextPosition2 = " ";
+        nextPosition3 = " ";
+        nextPosition4 = " ";
 
     }
+
+    public void memory2(){
+        gs.text.setText("You remember a memory from the old times.");
+        gs.image1.setImageResource(R.drawable.bg_strongholdoor);
+        setDcounter(0);
+
+        setTexts("Continue", "", "", "");
+
+        nextPosition1 = "memoryd2";
+
+    }
+
+    public void m2Door(){
+        gs.text.setText(dlg.M2_5);
+        gs.image1.setImageResource(R.drawable.bg_room1);
+        setDcounter(0);
+
+
+        setTexts("Continue", "", "", "");
+
+        nextPosition1 = "memoryd2_1";
+        nextPosition2 = "";
+        nextPosition3 = "";
+        nextPosition4 = "";
+    }
+
+
+    public void apothecary(){
+        gs.text.setText(dlg.M2_4);
+        gs.image1.setImageResource(R.drawable.bg_apothecary);
+
+        setTexts("Make strength potion",
+                 "Make beauty potion",
+                 "Make health potion",
+                 "Go back");
+
+        nextPosition1 = "strengthBrew";
+        nextPosition2 = "charismaBrew";
+        nextPosition3 = "healthBrew";
+        nextPosition4 = "memoryd2";
+    }
+    public void strengthBrew(){
+        if (status.getINT()==2){
+            gs.text.setText("You made a strength potion! \n" +
+                    "You felt a bit stronger.");
+            status.setSTR(status.getSTR()+5);
+        }else {
+            gs.text.setText("You weren't smart enough");
+        }
+
+
+
+        setTexts(" ",
+                "Make beauty potion",
+                "Make health potion",
+                "Go back");
+
+        nextPosition1 = " ";
+        nextPosition2 = "charismaBrew";
+        nextPosition3 = "healthBrew";
+        nextPosition4 = "memoryd2";
+    }
+
+    public void charismaBrew(){
+        if (status.getINT()==3){
+            gs.text.setText("You made a beauty potion! \n" +
+                    "You felt a bit beautiful");
+            status.setCHR(status.getCHR()+1);
+        }else {
+            gs.text.setText("You weren't smart enough");
+        }
+
+        setTexts("Make strength potion",
+                "",
+                "Make health potion",
+                "Go back");
+
+        nextPosition1 = "strengthBrew";
+        nextPosition2 = "";
+        nextPosition3 = "healthBrew";
+        nextPosition4 = "memoryd2";
+    }
+
+    public void healthBrew(){
+        if (status.getINT()==2){
+            gs.text.setText("You made a bottle with red substance in it!");
+            items = new item_hpBottle();
+            items.setQuantity(items.getQuantity()+1);
+            gs.itemqty1.setText(String.valueOf(items.getQuantity()));
+        }else{
+            gs.text.setText("You weren't smart enough");
+        }
+
+        setTexts("Make strength potion",
+                "Make beauty potion",
+                "",
+                "Go back");
+
+        nextPosition1 = "strengthBrew";
+        nextPosition2 = "charismaBrew";
+        nextPosition3 = "";
+        nextPosition4 = "memoryd2";
+    }
+
+    public void m2GeneralRoom(){
+        gs.text.setText(dlg.M2_3);
+        gs.image1.setImageResource(R.drawable.bg_generalroom);
+        setTexts("Open the chest", "Open the closet", "Look under table", "Go back");
+
+        nextPosition1 = "m2roomChest";
+        nextPosition2 = "m2roomCloset";
+        nextPosition3 = "m2roomTable";
+        nextPosition4 = "memoryd2";
+    }
+
+    public void m2roomChest(){
+        if (status.getSTR()==10){
+            gs.text.setText("You successfully opened the Chest and found " +
+                            "a key inside it.");
+            shkey=true;
+        }else{
+            gs.text.setText("You were not strong enough to open the chest.");
+        }
+        setTexts("","Open the closet", "Look under table", "Go back");
+
+        nextPosition1 = "";
+        nextPosition2 = "m2roomCloset";
+        nextPosition3 = "m2roomTable";
+        nextPosition4 = "memoryd2";
+    }
+
+    public void m2roomCloset(){
+        gs.text.setText("You find an astonishingly good clothes!");
+        status.setCHR(status.getCHR()+1);
+
+
+        setTexts("Open the chest","", "Look under table", "Go back");
+
+        nextPosition1 = "m2roomChest";
+        nextPosition2 = "";
+        nextPosition3 = "m2roomTable";
+        nextPosition4 = "memoryd2";
+    }
+
+    public void m2roomTable(){
+        gs.text.setText("You found a book about potion making. \n" +
+                "You felt a bit smarter.");
+        status.setINT(status.getINT()+1);
+        setTexts("Open the chest", "Open the closet", "", "Go back");
+
+        nextPosition1 = "m2roomChest";
+        nextPosition2 = "m2roomCloset";
+        nextPosition3 = "";
+        nextPosition4 = "memoryd2";
+    }
+
+
 
     public void lose (){
         gs.text.setText("You lost");
