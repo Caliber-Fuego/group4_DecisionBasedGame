@@ -99,6 +99,7 @@ public class Story {
             case "talkFight": talkFight(); break;
             case "memory1": memory1(); break;
             case "memory2": memory2(); break;
+            case "memory3": memory3(); break;
             case "m2GeneralRoom": m2GeneralRoom(); break;
             case "m2roomChest": m2roomChest(); break;
             case "m2roomCloset": m2roomCloset(); break;
@@ -167,6 +168,26 @@ public class Story {
                     memoryCounter++;
                     roomRoll(gs.text);
                 }
+                break;
+            case "memoryd3":
+                if (dcounter==0){
+                    gs.text.setText(dlg.M3_1);
+                    dcounter++;
+                }else if (dcounter==1){
+                    gs.text.setText(dlg.M3_2);
+                    gs.image1.setImageResource(R.drawable.bg_ceremony1);
+                    dcounter++;
+                }else if (dcounter==2){
+                    gs.text.setText(dlg.M3_3);
+                    gs.image1.setImageResource(R.drawable.bg_ceremony2);
+                    dcounter++;
+                }else if (dcounter==3){
+                    gs.text.setText("The memory ends there \n" +
+                                    "Knowing that you were a hero, you felt a bit stronger.");
+                    status.setSTR(status.getSTR()+10);
+                    memoryCounter++;
+                    roomRoll(gs.text);
+                }
             }
     }
 
@@ -217,6 +238,7 @@ public class Story {
                     "What will you do?");
         }
 
+        setFloorCounter(0);
         status.setHeroHPoints(100);
         gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
         gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
@@ -323,8 +345,7 @@ public class Story {
         gs.wpntxt.setText(status.name);
         status.addDamage(status.damage, status.getHeroMinDamage(), status.getHeroMaxDamage());
 
-        gs.btn1.setText("Continue on");
-        gs.btn2.setText("Go back outside");
+        setTexts("Continue On", "Go back outside", "","");
 
         nextPosition1 = "monsterEncounter";
         nextPosition2 = "startingPoint";
@@ -403,7 +424,10 @@ public class Story {
             nextPosition1 = "memory1";
         }else if (battleCounter==2){
             nextPosition1 = "memory2";
-        }else {
+        }else if (battleCounter==3){
+            nextPosition1 = "memory3";
+        }
+        else {
             roomRoll(gs.text);
         }
 
@@ -433,11 +457,23 @@ public class Story {
 
     }
 
+    public void memory3(){
+        gs.text.setText("You remember a memory from the old times.");
+        gs.image1.setImageResource(R.drawable.bg_ceremony);
+        setDcounter(0);
+
+        setTexts("Continue", "", "", "");
+
+        nextPosition1 = "memoryd3";
+        nextPosition2 = " ";
+        nextPosition3 = " ";
+        nextPosition4 = " ";
+    }
+
     public void m2Door(){
         gs.text.setText(dlg.M2_5);
         gs.image1.setImageResource(R.drawable.bg_room1);
         setDcounter(0);
-
 
         setTexts("Continue", "", "", "");
 
@@ -470,8 +506,6 @@ public class Story {
         }else {
             gs.text.setText("You weren't smart enough");
         }
-
-
 
         setTexts(" ",
                 "Make beauty potion",
@@ -577,8 +611,6 @@ public class Story {
         nextPosition4 = "memoryd2";
     }
 
-
-
     public void lose (){
         gs.text.setText("You lost");
         deathCounter++;
@@ -594,6 +626,7 @@ public class Story {
     public void healingRoom (){
         gs.text.setText("You are in a space where you are safe from monster attack \n\n" +
                         "You decide to take a rest");
+        gs.image1.setImageResource(R.drawable.bg_cave);
 
         //Adds 40% of the Player HP to Player's HP
         status.healHP(status.getHeroHPoints(), 40);
@@ -603,6 +636,7 @@ public class Story {
         roomRoll(gs.text);
     }
     public void itemRoom (){
+        gs.image1.setImageResource(R.drawable.bg_treasure);
         gc.itemRoll(gs.text, gs.itemqty1);
 
         roomRoll(gs.text);
@@ -610,6 +644,7 @@ public class Story {
 
     public void minibossRoom (){
         monster = new Monster_Floor1Boss();
+        gs.image1.setImageResource(R.drawable.monster_floor1boss);
         gs.text.setText("a Floor master appears! \n" +
                         "A knight cursed by the Demon Lord, his presence feels familiar to you. \n" +
                         "You unlocked the TALK option!");
@@ -648,7 +683,9 @@ public class Story {
             gs.text.setText("He remembered the times before his death. \n" +
                     "The times, he spent with you as a friend. \n" +
                     "Just a little more now.");
+            gs.image1.setImageResource(R.drawable.monster_truefloor1boss);
             f1boss.Monster_TrueFloor1Boss();
+
         }
 
         gs.btn1.setText(">");

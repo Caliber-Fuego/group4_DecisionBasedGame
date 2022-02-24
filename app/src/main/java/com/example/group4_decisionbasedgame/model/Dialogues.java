@@ -28,8 +28,18 @@ public class Dialogues {
                          "You realize that this man was just a mercenary.";
     public String M2_7 = "\"Stop? tough luck kid, I was paid and I have to comply.\" \n" +
                          "The man readies his weapon and takes up a stance \n" +
-                         "\"It's time to die kid!\"";
+                         "\"It's time for you to die!\"";
     public String M2_8 = "\"Oh, you'll pay me? Yeah sure let's stop!\" \n" +
                          "\"The name's Vincent by the way, pleased to meet you!\"";
+
+    //Memory 3 Dialogues
+    public String M3_1 = "You are standing infront of a thousand people, cheering on you.\n" +
+                         "It seems you are in some kind of ceremony.";
+    public String M3_2 = "\"A hero huh? You've come a long way!\" \n" +
+                         "It seems Vincent was beside you. \n" +
+                         "He was also being rewarded";
+    public String M3_3 = "\"As for me, I'm the Sun Knight from now on, not as cool as a hero" +
+                         " but hey, I like it!\" \n" +
+                         "He was smiling like a child.";
 }
 
