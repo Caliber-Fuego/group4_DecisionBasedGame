@@ -37,10 +37,10 @@ public class Story {
     private static int deathCounter = 0;
     private static int battleCounter= 0;
     private static int dcounter = 0;
+    private int shkey = 0;
 
     //Story booleans
     boolean dlog = false;
-    boolean shkey = false;
 
     //Getters for story values
     public int getFloorCounter() {
@@ -100,6 +100,7 @@ public class Story {
             case "memory1": memory1(); break;
             case "memory2": memory2(); break;
             case "memory3": memory3(); break;
+            case "memory4": memory4(); break;
             case "m2GeneralRoom": m2GeneralRoom(); break;
             case "m2roomChest": m2roomChest(); break;
             case "m2roomCloset": m2roomCloset(); break;
@@ -109,6 +110,11 @@ public class Story {
             case "charismaBrew": charismaBrew(); break;
             case "healthBrew": healthBrew(); break;
             case "m2Door": m2Door(); break;
+            case "m4suggest1": m4suggest1(); break;
+            case "m4suggest2": m4suggest2(); break;
+            case "wizardTalk": wizardTalk(); break;
+            case "guardTalk": guardTalk(); break;
+            case "guardConfront": guardConfront(); break;
 
             //Dialogue Cases
             case "memoryd1":
@@ -140,14 +146,14 @@ public class Story {
                     nextPosition3 = "apothecary";
                     nextPosition4 = " ";
 
-                    if (shkey=true) {
+                    if (shkey == 1) {
                         nextPosition1 = "m2Door";
                     }
-                    if (status.getSTR()==10);
-                    nextPosition4 = "m2Door";
-                }
+                    if (status.getSTR()>=15){
+                        nextPosition4 = "m2Door";
+                        }
+                    }
                 break;
-
             case "memoryd2_1":
                 if (dcounter==0){
                     gs.text.setText(dlg.M2_6);
@@ -188,6 +194,108 @@ public class Story {
                     memoryCounter++;
                     roomRoll(gs.text);
                 }
+                break;
+            case "memoryd4":
+                if (dcounter==0){
+                    gs.text.setText(dlg.M4_1);
+                    dcounter++;
+                }else if (dcounter==1){
+                    gs.text.setText(dlg.M4_2);
+                    dcounter++;
+                }else if (dcounter==2){
+                    gs.text.setText(dlg.M4_3);
+                    gs.image1.setImageResource(R.drawable.bg_wartable1);
+                    dcounter++;
+
+                    setTexts("Suggest Attack", "Suggest Probe", "Talk to Wizard", "Talk to Guard");
+
+                    nextPosition1 = "m4suggest1";
+                    nextPosition2 = "m4suggest2";
+                    nextPosition3 = "wizardTalk";
+                    nextPosition4 = "guardTalk";
+                }
+                break;
+            case "guardDialogue":
+                if (dcounter==1){
+                    gs.text.setText(dlg.M4_13);
+                    dcounter++;
+                    setTexts("Beat him up.", "Your appearance.", "", "");
+
+                    nextPosition1 = "guardSTR";
+                    nextPosition2 = "guardINT";
+                    nextPosition3 = "";
+                    nextPosition4 = "";
+                }
+                break;
+            case "guardSTR":
+                if (dcounter==2){
+                    gs.image1.setImageResource(R.drawable.bg_guard2);
+                    gs.text.setText(dlg.M4_14beat);
+                    dcounter++;
+                    setTexts("Tell me your base", "", "", "");
+
+                    nextPosition1 = "guardSTR";
+                    nextPosition2 = "";
+                } else if (dcounter==3){
+                    gs.image1.setImageResource(R.drawable.bg_guard);
+                    gs.text.setText(dlg.M4_15);
+                    dcounter++;
+                    setTexts("Threaten him", "", "", "");
+
+                    nextPosition1 = "guardSTR";
+                    nextPosition2 = "";
+                } else if (dcounter==4){
+                    gs.image1.setImageResource(R.drawable.bg_guard2);
+                    gs.text.setText(dlg.M4_16beat);
+                    dcounter ++;
+                    setTexts("Continue", "", "", "");
+
+                    nextPosition1 = "guardSTR";
+                    nextPosition2 = "";
+                } else if (dcounter==5){
+                    gs.image1.setImageResource(R.drawable.bg_guard2);
+                    gs.text.setText(dlg.M4_17beat);
+                    status.setSTR(status.getSTR()+5);
+                    status.setINT(status.getINT()+2);
+                    memoryCounter++;
+                    roomRoll(gs.text);
+                }
+                break;
+            case "guardINT":
+                if (dcounter==2){
+                    gs.image1.setImageResource(R.drawable.bg_guard3);
+                    gs.text.setText(dlg.M4_14int);
+                    dcounter++;
+                    setTexts("Tell me your base", "", "", "");
+
+                    nextPosition1 = "guardINT";
+                    nextPosition2 = "";
+                } else if (dcounter==3){
+                    gs.image1.setImageResource(R.drawable.bg_guard);
+                    gs.text.setText(dlg.M4_15);
+                    dcounter++;
+                    setTexts("You're lying", "", "", "");
+
+                    nextPosition1 = "guardINT";
+                    nextPosition2 = "";
+                } else if (dcounter==4){
+                    gs.image1.setImageResource(R.drawable.bg_guard3);
+                    gs.text.setText(dlg.M4_16int);
+                    dcounter ++;
+                    setTexts("Okay", "", "", "");
+
+                    nextPosition1 = "guardINT";
+                    nextPosition2 = "";
+                } else if (dcounter==5){
+                    gs.image1.setImageResource(R.drawable.bg_guard);
+                    gs.text.setText(dlg.M4_17int);
+                    status.setSTR(status.getSTR()+2);
+                    status.setINT(status.getINT()+5);
+                    memoryCounter++;
+                    roomRoll(gs.text);
+                }
+                break;
+
             }
     }
 
@@ -426,6 +534,8 @@ public class Story {
             nextPosition1 = "memory2";
         }else if (battleCounter==3){
             nextPosition1 = "memory3";
+        }else if (battleCounter==4){
+            nextPosition1 = "memory4";
         }
         else {
             roomRoll(gs.text);
@@ -470,6 +580,123 @@ public class Story {
         nextPosition4 = " ";
     }
 
+    public void memory4(){
+        gs.text.setText("You remember a memory from the old times.");
+        gs.image1.setImageResource(R.drawable.bg_wartable);
+        setDcounter(0);
+
+        setTexts("Continue", "", "", "");
+
+        nextPosition1 = "memoryd4";
+        nextPosition2 = " ";
+        nextPosition3 = " ";
+        nextPosition4 = " ";
+
+    }
+
+    public void m4suggest1(){
+        if (status.getSTR()>=30){
+            gs.text.setText(dlg.M4_4);
+            status.setCHR(status.getCHR()+5);
+        }else {
+            gs.text.setText (dlg.M4_5);
+            status.setCHR(status.getCHR()+1);
+        }
+
+        setTexts("", "", "Talk to Wizard", "Talk to Guard");
+        nextPosition1 = "";
+        nextPosition2 = "";
+        nextPosition3 = "wizardTalk";
+        nextPosition4 = "guardTalk";
+    }
+
+    public void m4suggest2(){
+        if (status.getINT()>=10){
+            gs.text.setText(dlg.M4_6);
+            status.setCHR(status.getCHR()+5);
+        }else {
+            gs.text.setText (dlg.M4_7);
+            status.setCHR(status.getCHR()+1);
+        }
+
+        setTexts("", "", "Talk to Wizard", "Talk to Guard");
+        nextPosition1 = "";
+        nextPosition2 = "";
+        nextPosition3 = "wizardTalk";
+        nextPosition4 = "guardTalk";
+    }
+
+    public void wizardTalk(){
+        gs.image1.setImageResource(R.drawable.bg_wartable2);
+        if (dcounter==3){
+            gs.text.setText(dlg.M4_8);
+            dcounter++;
+        } else if (dcounter==4) {
+            gs.text.setText(dlg.M4_9);
+            status.setINT(status.getINT()+1);
+            status.setSTR(status.getSTR()+1);
+            dcounter++;
+        } else if (dcounter==5) {
+            gs.text.setText("The old man is stroking his chin.");
+        }
+
+        if (dcounter==5){
+            setTexts("Suggest Attack", "Suggest Probe", " ", "Talk to Guard");
+
+            nextPosition1 = "m4suggest1";
+            nextPosition2 = "m4suggest2";
+            nextPosition3 = "";
+            nextPosition4 = "guardTalk";
+        }else {
+            setTexts("Continue", "", " ", " ");
+
+            nextPosition1 = "wizardTalk";
+            nextPosition2 = "";
+            nextPosition3 = "";
+            nextPosition4 = "";
+        }
+    }
+
+    public void guardTalk(){
+        gs.image1.setImageResource(R.drawable.bg_guard);
+        setDcounter(0);
+        if (dcounter==0){
+            gs.text.setText(dlg.M4_10);
+            dcounter++;
+        }else if (dcounter==1){
+            gs.text.setText(dlg.M4_11);
+        }
+        if (dcounter==1){
+            setTexts("Suggest Attack", "Suggest Probe", "Come with me", "");
+
+            nextPosition1 = "m4suggest1";
+            nextPosition2 = "m4suggest2";
+            nextPosition3 = "guardConfront";
+            nextPosition4 = "";
+        }else {
+            setTexts("Continue", "", " ", " ");
+
+            nextPosition1 = "guardTalk";
+            nextPosition2 = "";
+            nextPosition3 = "";
+            nextPosition4 = "";
+        }
+    }
+
+    public void guardConfront(){
+        gs.image1.setImageResource(R.drawable.bg_guard1);
+        setDcounter(1);
+        gs.text.setText(dlg.M4_12);
+
+        setTexts("I don't recognize you.", "", "", "");
+
+        nextPosition1 = "guardDialogue";
+        nextPosition2 = "";
+        nextPosition3 = "";
+        nextPosition4 = "";
+    }
+
+
     public void m2Door(){
         gs.text.setText(dlg.M2_5);
         gs.image1.setImageResource(R.drawable.bg_room1);
@@ -499,7 +726,7 @@ public class Story {
         nextPosition4 = "memoryd2";
     }
     public void strengthBrew(){
-        if (status.getINT()==2){
+        if (status.getINT()>=2){
             gs.text.setText("You made a strength potion! \n" +
                     "You felt a bit stronger.");
             status.setSTR(status.getSTR()+5);
@@ -519,7 +746,7 @@ public class Story {
     }
 
     public void charismaBrew(){
-        if (status.getINT()==3){
+        if (status.getINT()>=3){
             gs.text.setText("You made a beauty potion! \n" +
                     "You felt a bit beautiful");
             status.setCHR(status.getCHR()+1);
@@ -539,7 +766,7 @@ public class Story {
     }
 
     public void healthBrew(){
-        if (status.getINT()==2){
+        if (status.getINT()>=2){
             gs.text.setText("You made a bottle with red substance in it!");
             items = new item_hpBottle();
             items.setQuantity(items.getQuantity()+1);
@@ -571,10 +798,10 @@ public class Story {
     }
 
     public void m2roomChest(){
-        if (status.getSTR()==10){
+        if (status.getSTR()>=10){
             gs.text.setText("You successfully opened the Chest and found " +
                             "a key inside it.");
-            shkey=true;
+            shkey = 1;
         }else{
             gs.text.setText("You were not strong enough to open the chest.");
         }
@@ -645,6 +872,7 @@ public class Story {
     public void minibossRoom (){
         monster = new Monster_Floor1Boss();
         gs.image1.setImageResource(R.drawable.monster_floor1boss);
+        f1boss.setWeakened(0);
         gs.text.setText("a Floor master appears! \n" +
                         "A knight cursed by the Demon Lord, his presence feels familiar to you. \n" +
                         "You unlocked the TALK option!");

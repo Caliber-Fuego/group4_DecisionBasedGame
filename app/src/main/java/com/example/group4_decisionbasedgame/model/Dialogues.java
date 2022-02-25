@@ -41,5 +41,50 @@ public class Dialogues {
     public String M3_3 = "\"As for me, I'm the Sun Knight from now on, not as cool as a hero" +
                          " but hey, I like it!\" \n" +
                          "He was smiling like a child.";
+
+    //Memory 4 Dialogues
+    public String M4_1 = "You are with several other armored people surrounding a table. \n" +
+                         "It seems you are having a meeting with them.";
+    public String M4_2 = "\"What I'm telling you is we should just charge at them!\" A man shouted. \n" +
+                         "\"That's stupid and risky! We should probe information first!\" Another man shouted.";
+    public String M4_3 = "It seems we are going nowhere. \n" +
+                         "\"It's always like this.\" Vincent sighed. \n" +
+                         "\"Say, what would you do in this situation?\"";
+    public String M4_4 = "You suggested to attack \n" +
+                         "Since you have lots of achievements under your belt," +
+                         " They decided to trust you.";
+    public String M4_5 = "You tried to suggest to attack. \n" +
+                         "However, since you are still inexperienced, they told you to shut up.";
+    public String M4_6 = "You suggested to probe information \n" +
+                         "Since you have great knowledge on strategy," +
+                         " They decided to trust you.";
+    public String M4_7 = "You tried to suggest to probe information \n" +
+                         "However, because you are dumb, they told you to shut up.";
+    public String M4_8 = "\"You're asking for a senile old man's insight?\" \n" +
+                         "\"Well, in my opinion I think this is the best time to strike, the demons are still weak after all.\"";
+    public String M4_9 = "\"Who knows, if they get any stronger they might be more dangerous at that time.\" \n" +
+                         "You felt a bit smarter after listening.";
+    public String M4_10 = "...";
+    public String M4_11 = "I have nothing to say.";
+    public String M4_12 = "\"What do you want hero?\" \n" +
+                          "The guard says as he looks at you with irritation.";
+    public String M4_13 = "\"Well, that's normal right? Who the hell remembers everyone " +
+                          "they meet anyways.";
+    public String M4_14beat = "You beat him up and find out he was a demon. \n" +
+                          "\"DAMN! You didn't have to do that you know?\"";
+    public String M4_14int = "\"Ah... Those damn higher ups didn't even bother getting us the correct armor.\" The guard sighed " +
+                             "\"Look, just don't kill me and I'll tell you everything.\"";
+    public String M4_15 = "\"I don't know jack about the Demon Lord's base, but I'll tell you about one of the elites.\" \n" +
+                          "\"It's located near here, just head north.\"";
+    public String M4_16beat = "\"WOAH! put down that sword!\" \n" +
+                              "\"It's south! it's south! I'm sorry okay!\"";
+    public String M4_16int = "\"Damn, you're that smart huh...\" \n" +
+                             "\"Okay, fine it's actually southward.\" \n" +
+                             "\"Well, just don't die with this info.\"";
+    public String M4_17beat ="Knowing that you beat up a spy. \n" +
+                             "You felt stronger and a bit smarter.";
+    public String M4_17int = "\"Oh yeah, and help me get out of here.\"" +
+                             "Knowing that you rooted out a spy \n" +
+                             "You felt smarter and a bit stronger.";
 }
 
