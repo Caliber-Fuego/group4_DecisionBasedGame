@@ -4,6 +4,7 @@ import android.widget.TextView;
 
 import java.util.Random;
 import com.example.group4_decisionbasedgame.controller.Story;
+import com.example.group4_decisionbasedgame.model.Dialogues;
 import com.example.group4_decisionbasedgame.model.Items;
 import com.example.group4_decisionbasedgame.model.MonsterStatus;
 import com.example.group4_decisionbasedgame.model.PlayerStatus;
@@ -16,6 +17,8 @@ public class GameCalculations {
     Items items = new Items();
     PlayerStatus status = new PlayerStatus();
     MonsterStatus monster = new MonsterStatus();
+    Dialogues dlg = new Dialogues();
+
     Random randomizer = new Random();
     Random roll = new Random();
 
@@ -23,6 +26,8 @@ public class GameCalculations {
     public int baseDamage(int minDamage, int maxDamage, int str, int armor) {
         return (randomizer.nextInt((maxDamage + str ) - (minDamage + str)) + (minDamage+str)) - (armor*10);
     }
+
+
 
 
     //Method for Item Randomization
