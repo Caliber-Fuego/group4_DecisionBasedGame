@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.example.group4_decisionbasedgame.R;
 import com.example.group4_decisionbasedgame.model.Dialogues;
 import com.example.group4_decisionbasedgame.model.values.items.item_hpBottle;
+import com.example.group4_decisionbasedgame.model.values.monster.Monster_Colonel;
 import com.example.group4_decisionbasedgame.model.values.monster.Monster_Floor1Boss;
 import com.example.group4_decisionbasedgame.model.values.monster.Monster_Soldier;
 import com.example.group4_decisionbasedgame.view.GameScreen;
@@ -28,6 +29,7 @@ public class Story {
     PlayerStatus status = new PlayerStatus();
     MonsterStatus monster = new MonsterStatus();
     Monster_Floor1Boss f1boss = new Monster_Floor1Boss();
+    Monster_Colonel colonel = new Monster_Colonel();
     GameCalculations gc = new GameCalculations();
     Dialogues dlg = new Dialogues();
 
@@ -44,6 +46,10 @@ public class Story {
     private int fcounter = 0;
     private int gcounter = 0;
     private int hcounter = 0;
+    private int icounter = 0;
+    private int jcounter = 0;
+    private int kcounter = 0;
+    private int lcounter = 0;
 
     //Story booleans
     boolean dlog = false;
@@ -53,6 +59,8 @@ public class Story {
     private int puzzlepiece1 = 0;
     private int puzzlepiece2 = 0;
     private int puzzlesolved = 0;
+
+
 
     //Getters for story values
 
@@ -147,6 +155,18 @@ public class Story {
             case "weaponread": weaponread(); break;
             case "stanceread": stanceread(); break;
             case "strategyread": strategyread(); break;
+            case "m5memoryend": m5memoryend(); break;
+            case "m5colonelfight": m5colonelfight(); break;
+            case "colonelAttack": colonelAttack(); break;
+            case "curseCheck": curseCheck(); break;
+            case "vincentTurn": vincentTurn(); break;
+            case "magusTurn": magusTurn(); break;
+            case "leoTurn": leoTurn(); break;
+            case "m5memoryend2": m5memoryend2(); break;
+            case "nomemorytalk": nomemorytalk(); break;
+            case "memorytalk": memorytalk(); break;
+            case "killend": killend(); break;
+            case "goodend": goodend(); break;
 
             //Dialogue Cases
             case "memoryd1":
@@ -173,6 +193,7 @@ public class Story {
                     gs.text.setText(dlg.M2_2);
                     gs.image1.setImageResource(R.drawable.bg_strongholdoor);
                     setTexts("Open the door", "Go to a Room", "Go to Potion Lab", "Break down the Door");
+
                     nextPosition1 = " ";
                     nextPosition2 = "m2GeneralRoom";
                     nextPosition3 = "apothecary";
@@ -370,7 +391,7 @@ public class Story {
             }
     }
 
-    //Rolls from 1 - 3 and then moves on to the assigned method
+    //Method for rolling from 1 - 3 and then moves on to the assigned method
     public void roomRoll(TextView text){
         Random roll = new Random();
         int diceRoll = roll.nextInt(3);
@@ -402,8 +423,10 @@ public class Story {
         gs.btn4.setText(text4);
     }
 
+    //General outline for Dialogue and Decision Methods
     public void startingPoint(){
-            //sets text for the case "startingPoint" or any of the other cases
+
+        //sets text for the case "startingPoint" or any of the other cases
         gs.image1.setImageResource(R.drawable.bg_castlegate);
 
         //If the player has died once or more, then this message will show up instead of the other one.
@@ -423,13 +446,14 @@ public class Story {
         gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
         gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
 
+        //Sets texts for the buttons.
         setTexts("Open the Gate", "Examine the gate", "Look around", "Kill yourself.");
 
+        //Sets the strings that directs the player to the next dialogue
         nextPosition1 = "oldMan";
         nextPosition2 = "castleGate";
         nextPosition3 = "plainFields";
         nextPosition4 = "gameOver";
-            //Directs the buttons to the next method
     }
 
     public void castleGate(){
@@ -608,7 +632,7 @@ public class Story {
             nextPosition1 = "memory3";
         }else if (battleCounter==4){
             nextPosition1 = "memory4";
-        }else if (battleCounter==5){
+        }else if (memoryCounter==4){
             nextPosition1 = "memory5";
         }
         else {
@@ -638,7 +662,6 @@ public class Story {
         setTexts("Continue", "", "", "");
 
         nextPosition1 = "memoryd2";
-
     }
 
     public void memory3(){
@@ -982,7 +1005,7 @@ public class Story {
     }
 
     public void weaponread(){
-        if(status.getINT()==6){
+        if(status.getINT()>=6){
             gs.text.setText(dlg.M5_59);
             status.setSTR(status.getSTR()+5);
         }else {
@@ -999,7 +1022,7 @@ public class Story {
     }
 
     public void stanceread(){
-        if(status.getINT()==6){
+        if(status.getINT()>=6){
             gs.text.setText(dlg.M5_60);
             status.setSTR(status.getSTR()+5);
         }else {
@@ -1014,7 +1037,7 @@ public class Story {
     }
 
     public void strategyread(){
-        if(status.getINT()==6){
+        if(status.getINT()>=6){
             gs.text.setText(dlg.M5_61);
             status.setINT(status.getINT()+1);
             status.setCHR(status.getCHR()+1);
@@ -1069,6 +1092,279 @@ public class Story {
 
     }
 
+    public void m5memoryend() {
+        switch (icounter) {
+            case 0: gs.text.setText(dlg.M5_62);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom);break;
+            case 1: gs.text.setText(dlg.M5_63);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom1);break;
+            case 2: gs.text.setText(dlg.M5_64);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomleo1);break;
+            case 3: gs.text.setText(dlg.M5_65);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom1);break;
+            case 4: gs.text.setText(dlg.M5_66);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1);break;
+            case 5: gs.text.setText(dlg.M5_67);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom1);break;
+            case 6: gs.text.setText(dlg.M5_68);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom2);break;
+            case 7: gs.text.setText(dlg.M5_69);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomleo1);break;
+            case 8: gs.text.setText(dlg.M5_70);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom1);break;
+            case 9: gs.text.setText(dlg.M5_71);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom2);break;
+            case 10: gs.text.setText(dlg.M5_72);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroommag1);break;
+            case 11: gs.text.setText(dlg.M5_73);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom2);break;
+            case 12: gs.text.setText(dlg.M5_74);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin2);break;
+            case 13: gs.text.setText(dlg.M5_75);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom);break;
+            case 14: gs.text.setText(dlg.M5_76);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom2);break;
+            case 15: gs.text.setText(dlg.M5_77);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin2);break;
+            case 16: gs.text.setText(dlg.M5_78);icounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom);break;
+        }
+        if (icounter==17){
+            gs.text.setText(dlg.M5_78);
+            gs.image1.setImageResource(R.drawable.bg_colonelroom);
+            monster = new Monster_Colonel();
+            setTexts("Fight", "", "", "");
+
+            nextPosition1 = "m5colonelfight";
+            nextPosition2 = "";
+            nextPosition3 = "";
+            nextPosition4 = "";
+        }else {
+            setTexts("Continue", "", " ", " ");
+
+            nextPosition1 = "m5memoryend";
+            nextPosition2 = "";
+            nextPosition3 = "";
+            nextPosition4 = "";
+        }
+    }
+
+    public void m5colonelfight(){
+        int playerDamage = gc.baseDamage(status.getHeroMinDamage(), status.getHeroMaxDamage(), status.getSTR() , 0);
+        gs.text.setText("You attacked the "+monster.getMonsterName()+" and gave " + playerDamage + " damage");
+
+        monster.setMonHPts(monster.getMonHPts() - playerDamage);
+        monster.getMonHPts();
+
+        setTexts(">", "", "", "");
+
+        if(monster.getMonHPts() >  0){
+            nextPosition1 = "vincentTurn";
+            nextPosition2 = " ";
+        }
+        else if(monster.getMonHPts() < 1){
+            nextPosition1 = "m5memoryend2";
+            nextPosition2 = " ";
+        }
+    }
+
+    public void vincentTurn(){
+        gs.image1.setImageResource(R.drawable.bg_colonelroomvin);
+        gc.vincentAttack(gs.text, status.getSTR());
+        monster.getMonHPts();
+
+        if(monster.getMonHPts() >  0){
+            nextPosition1 = "magusTurn";
+            nextPosition2 = " ";
+        }
+        else if(monster.getMonHPts() < 1){
+            nextPosition1 = "m5memoryend2";
+            nextPosition2 = " ";
+        }
+    }
+
+    public void magusTurn(){
+        gs.image1.setImageResource(R.drawable.bg_castlegatemage);
+        gc.magusAttack(gs.text, gs.hptext, gs.healthbar, status.getINT());
+        monster.getMonHPts();
+
+        if(monster.getMonHPts() >  0){
+            nextPosition1 = "leoTurn";
+            nextPosition2 = " ";
+        }
+        else if(monster.getMonHPts() < 1){
+            nextPosition1 = "m5memoryend2";
+            nextPosition2 = " ";
+        }
+    }
+
+    public void leoTurn(){
+        gs.image1.setImageResource(R.drawable.bg_castlegateleo);
+        gc.leoAttack(gs.text, status.getSTR());
+        monster.getMonHPts();
+
+        if(monster.getMonHPts() >  0){
+            nextPosition1 = "colonelAttack";
+            nextPosition2 = " ";
+        }
+        else if(monster.getMonHPts() < 1){
+            nextPosition1 = "m5memoryend2";
+            nextPosition2 = " ";
+        }
+    }
+
+    public void colonelAttack(){
+        gs.image1.setImageResource(R.drawable.bg_colonelroom1);
+        Random roll = new Random();
+        int bossRoll = roll.nextInt(2);
+        if (bossRoll==0){
+            int monsterDamage = gc.baseDamage(colonel.getMonMinDmg(), colonel.getMonMaxDmg(), 0, status.getArmor());
+            gs.text.setText("The "+monster.getMonsterName()+" dealt "+monsterDamage+" damage to you");
+
+            status.setHeroHPoints(status.getHeroHPoints() - monsterDamage);
+            status.getHeroHPoints();
+            gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
+            gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
+
+        }else if(bossRoll==1){
+            colonel.curseMagic(gs.text);
+        }
+
+
+
+         if (status.getHeroHPoints() > 0){
+            setTexts("Fight", "", "", "");
+            nextPosition1 = "m5colonelfight";
+            nextPosition2 = "";
+            nextPosition3 = "";
+            nextPosition4 = "";
+
+             if(colonel.getCurse() > 0) {
+                 setTexts(">", "", "", "");
+                 nextPosition1 = "curseCheck";
+                 nextPosition2 = "";
+                 nextPosition3 = "";
+                 nextPosition4 = "";
+             }
+        }else if (status.getHeroHPoints() < 1){
+            nextPosition1 = "lose";
+            nextPosition2 = "";
+            nextPosition3 = "";
+            nextPosition4 = "";
+        }
+    }
+
+    public void curseCheck(){
+        colonel.cursedDamage(gs.text);
+        status.getHeroHPoints();
+        gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
+        gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
+
+        if (status.getHeroHPoints() > 0){
+            nextPosition1 = "m5colonelfight";
+            nextPosition2 = " ";
+        }
+        else if (status.getHeroHPoints() < 1){
+            nextPosition1 = "lose";
+            nextPosition2 = " ";
+        }
+    }
+
+    public void m5memoryend2() {
+        switch (jcounter) {
+            case 0: gs.text.setText(dlg.M5_79);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom2);break;
+            case 1: gs.text.setText(dlg.M5_80);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin);break;
+            case 2: gs.text.setText(dlg.M5_81);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin);break;
+            case 3: gs.text.setText(dlg.M5_82);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom1);break;
+            case 4: gs.text.setText(dlg.M5_83);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin);break;
+            case 5: gs.text.setText(dlg.M5_84);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom3);break;
+            case 6: gs.text.setText(dlg.M5_85);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_castlegateleo);break;
+            case 7: gs.text.setText(dlg.M5_86);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom3);break;
+            case 8: gs.text.setText(dlg.M5_87);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroommag1);break;
+            case 9: gs.text.setText(dlg.M5_88);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom3);break;
+            case 10: gs.text.setText(dlg.M5_89);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin);break;
+            case 11: gs.text.setText(dlg.M5_90);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom3);break;
+            case 12: gs.text.setText(dlg.M5_91);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom3);break;
+            case 13: gs.text.setText(dlg.M5_92);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin);break;
+            case 14: gs.text.setText(dlg.M5_93);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin);break;
+            case 15: gs.text.setText(dlg.M5_94);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom3);break;
+            case 16: gs.text.setText(dlg.M5_95);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 17: gs.text.setText(dlg.M5_96);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroommag2);break;
+            case 18: gs.text.setText(dlg.M5_97);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 19: gs.text.setText(dlg.M5_98);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomleo1);break;
+            case 20: gs.text.setText(dlg.M5_99);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 21: gs.text.setText(dlg.M5_100);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom3);break;
+            case 22: gs.text.setText(dlg.M5_101);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 23: gs.text.setText(dlg.M5_102);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroommag2);break;
+            case 24: gs.text.setText(dlg.M5_103);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom3);break;
+            case 25: gs.text.setText(dlg.M5_104);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 26: gs.text.setText(dlg.M5_105);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 27: gs.text.setText(dlg.M5_106);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 28: gs.text.setText(dlg.M5_107);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 29: gs.text.setText(dlg.M5_108);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 30: gs.text.setText(dlg.M5_109);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 31: gs.text.setText(dlg.M5_110);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 32: gs.text.setText(dlg.M5_111);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 33: gs.text.setText(dlg.M5_112);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 34: gs.text.setText(dlg.M5_113);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 35: gs.text.setText(dlg.M5_114);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroomvin1shine);break;
+            case 36: gs.text.setText(dlg.M5_115);jcounter++; status.setArmor(status.getArmor()+1);
+                gs.image1.setImageResource(R.drawable.bg_colonelroom);break;
+            case 37: gs.text.setText(dlg.M5_116);jcounter++;
+                gs.image1.setImageResource(R.drawable.bg_colonelroom);break;
+        }
+        if (jcounter==38){
+            gs.text.setText(dlg.M5_116);
+            gs.image1.setImageResource(R.drawable.bg_colonelroom);
+            setTexts("Continue", "", "", "");
+
+            memoryCounter++;
+            roomRoll(gs.text);
+        }else {
+            setTexts("Continue", "", " ", " ");
+
+            nextPosition1 = "m5memoryend2";
+            nextPosition2 = "";
+            nextPosition3 = "";
+            nextPosition4 = "";
+        }
+    }
 
     public void m4suggest1(){
         if (status.getSTR()>=30){
@@ -1359,7 +1655,7 @@ public class Story {
         nextPosition2 = "talkFight";
     }
     public void bossFight(){
-        int playerDamage = gc.baseDamage(status.getHeroMinDamage(), status.getHeroMaxDamage(), 0 , 0);
+        int playerDamage = gc.baseDamage(status.getHeroMinDamage(), status.getHeroMaxDamage(), status.getSTR(), 0);
         gs.text.setText("You attacked the "+monster.getMonsterName()+" and gave " + playerDamage + " damage");
 
         monster.setMonHPts(monster.getMonHPts() - playerDamage);
@@ -1373,8 +1669,12 @@ public class Story {
             nextPosition2 = " ";
         }
         else if(monster.getMonHPts() < 1){
-            nextPosition1 = "win";
+            nextPosition1 = "killend";
             nextPosition2 = " ";
+
+            if(f1boss.getWeakened()==8){
+                nextPosition1 = "goodend";
+            }
         }
     }
 
@@ -1382,25 +1682,82 @@ public class Story {
         f1boss.setWeakened(f1boss.getWeakened()+1);
         gs.text.setText("You tried to talk with the "+monster.getMonsterName()+".");
 
+        setTexts(">", "", "", "");
+
         f1boss.weakenedFormula(monster.getMonHPts(), monster.getMonMinDmg(), monster.getMonMaxDmg(), f1boss.getWeakened());
-        if(f1boss.getWeakened() == 4){
-            gs.text.setText("He remembered the times before his death. \n" +
-                    "The times, he spent with you as a friend. \n" +
-                    "Just a little more now.");
-            gs.image1.setImageResource(R.drawable.monster_truefloor1boss);
-            f1boss.Monster_TrueFloor1Boss();
-
-        }
-
-        gs.btn1.setText(">");
-        gs.btn2.setText("");
-
         if(monster.getMonHPts() >  0){
             nextPosition1 = "bossAttack";
             nextPosition2 = " ";
+
+            if(f1boss.getWeakened() == 4) {
+                gs.text.setText("He remembered the times before his death. \n" +
+                        "The times, he spent with you as a friend. \n" +
+                        "Just a little more now.");
+                gs.image1.setImageResource(R.drawable.monster_truefloor1boss);
+                f1boss.Monster_TrueFloor1Boss();
+
+                if (memoryCounter == 5) {
+                    nextPosition1 = "memorytalk";
+                    nextPosition2 = " ";
+                } else if (memoryCounter < 5) {
+                    nextPosition1 = "nomemorytalk";
+                    nextPosition2 = " ";
+                }
+            }
         }
         else if(monster.getMonHPts() < 1){
             nextPosition1 = "win";
+            nextPosition2 = " ";
+        }
+
+    }
+    public void nomemorytalk(){
+        switch(kcounter){
+            case 0: gs.text.setText(dlg.T_1);kcounter++;
+                gs.image1.setImageResource(R.drawable.monster_truefloor1boss);break;
+            case 1: gs.text.setText(dlg.T_2);kcounter++;
+                gs.image1.setImageResource(R.drawable.monster_truefloor1boss);break;
+            case 2: gs.text.setText(dlg.T_8);kcounter++;
+                gs.image1.setImageResource(R.drawable.monster_truefloor1boss);break;
+        }
+        if (kcounter==3){
+            gs.text.setText(dlg.T_8);
+            gs.image1.setImageResource(R.drawable.monster_truefloor1boss);
+            setTexts("Continue", "", "", "");
+                nextPosition1 = "bossAttack";
+                nextPosition2 = " ";
+        }else {
+            setTexts("Continue", "", "", "");
+            nextPosition1 = "nomemorytalk";
+            nextPosition2 = " ";
+        }
+    }
+    public void memorytalk(){
+        switch(kcounter){
+            case 0: gs.text.setText(dlg.T_1);kcounter++;
+                gs.image1.setImageResource(R.drawable.monster_truefloor1boss);break;
+            case 1: gs.text.setText(dlg.T_3);kcounter++;
+                gs.image1.setImageResource(R.drawable.monster_truefloor1boss);break;
+            case 2: gs.text.setText(dlg.T_4);kcounter++;
+                gs.image1.setImageResource(R.drawable.monster_truefloor1boss);break;
+            case 3: gs.text.setText(dlg.T_5);kcounter++;
+                gs.image1.setImageResource(R.drawable.monster_truefloor1boss);break;
+            case 4: gs.text.setText(dlg.T_6);kcounter++;
+                gs.image1.setImageResource(R.drawable.monster_truefloor1boss);break;
+            case 5: gs.text.setText(dlg.T_7);kcounter++;
+                gs.image1.setImageResource(R.drawable.monster_truefloor1boss);break;
+            case 6: gs.text.setText(dlg.T_8);kcounter++;
+                gs.image1.setImageResource(R.drawable.monster_truefloor1boss);break;
+        }
+        if (kcounter==7){
+            gs.text.setText(dlg.T_8);
+            gs.image1.setImageResource(R.drawable.monster_truefloor1boss);
+            setTexts("Continue", "", "", "");
+            nextPosition1 = "bossAttack";
+            nextPosition2 = " ";
+        }else {
+            setTexts("Continue", "", "", "");
+            nextPosition1 = "memorytalk";
             nextPosition2 = " ";
         }
     }
@@ -1428,6 +1785,55 @@ public class Story {
             nextPosition1 = "lose";
             nextPosition2 = " ";
         }
+    }
 
+    public void killend(){
+        switch(lcounter){
+            case 0: gs.text.setText(dlg.E_1);lcounter++;
+                gs.image1.setImageResource(R.drawable.bg_cave);break;
+            case 1: gs.text.setText(dlg.E_2);lcounter++;
+                gs.image1.setImageResource(R.drawable.bg_cave);break;
+            case 2: gs.text.setText(dlg.E_3);lcounter++;
+                gs.image1.setImageResource(R.drawable.bg_cave);break;
+            case 3: gs.text.setText(dlg.E_4);lcounter++;
+                gs.image1.setImageResource(R.drawable.bg_cave);break;
+            case 4: gs.text.setText(dlg.E_5);lcounter++;
+                gs.image1.setImageResource(R.drawable.bg_cave);break;
+          }
+        if (lcounter==5){
+            gs.text.setText(dlg.E_5);
+            gs.image1.setImageResource(R.drawable.bg_cave);
+            setTexts("", "", "", "");
+            nextPosition1 = "";
+            nextPosition2 = " ";
+        }else {
+            setTexts("Continue", "", "", "");
+            nextPosition1 = "killend";
+            nextPosition2 = " ";
+        }
+    }
+
+    public void goodend(){
+        switch(lcounter){
+            case 0: gs.text.setText(dlg.G_1);lcounter++;
+                gs.image1.setImageResource(R.drawable.bg_cave);break;
+            case 1: gs.text.setText(dlg.G_2);lcounter++;
+                gs.image1.setImageResource(R.drawable.bg_cave);break;
+            case 2: gs.text.setText(dlg.G_3);lcounter++;
+                gs.image1.setImageResource(R.drawable.bg_cave);break;
+            case 3: gs.text.setText(dlg.E_5);lcounter++;
+                gs.image1.setImageResource(R.drawable.bg_cave);break;
+    }
+        if (lcounter==4){
+            gs.text.setText(dlg.E_5);
+            gs.image1.setImageResource(R.drawable.bg_cave);
+            setTexts("", "", "", "");
+            nextPosition1 = "";
+            nextPosition2 = " ";
+        }else {
+            setTexts("Continue", "", "", "");
+            nextPosition1 = "goodend";
+            nextPosition2 = " ";
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.group4_decisionbasedgame.controller;
 
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -10,6 +11,8 @@ import com.example.group4_decisionbasedgame.model.MonsterStatus;
 import com.example.group4_decisionbasedgame.model.PlayerStatus;
 import com.example.group4_decisionbasedgame.model.values.items.item_hpBottle;
 import com.example.group4_decisionbasedgame.view.GameScreen;
+
+import org.w3c.dom.Text;
 
 public class GameCalculations {
 
@@ -52,7 +55,43 @@ public class GameCalculations {
             text.setText("You found an ancient armor!");
             status.setArmor(status.getArmor()+1);
         }
+    }
 
+    public void vincentAttack (TextView text, int str){
+        int vincentMinDmg = 40;
+        int vincentMaxDmg = 90;
+
+        int npcDamage = (randomizer.nextInt((vincentMaxDmg + str) - (vincentMinDmg + str)) + (vincentMinDmg + str));
+        monster.setMonHPts(monster.getMonHPts() - npcDamage);
+        text.setText(("Vincent dealt "+npcDamage+" damage to "+monster.getMonsterName()));
+    }
+
+    public void magusAttack (TextView text, TextView hptext, ProgressBar healthbar, int INT){
+        int magusMinDmg = 50;
+        int magusMaxDmg = 100;
+
+        Random roll = new Random();
+
+        int turnRoll = roll.nextInt(2);
+        if (turnRoll==0){
+            int npcDamage = (randomizer.nextInt((magusMaxDmg + INT) - (magusMinDmg + INT)) + (magusMinDmg + INT));
+            monster.setMonHPts(monster.getMonHPts() - npcDamage);
+            text.setText("The Mage dealt "+npcDamage+" damage to "+monster.getMonsterName());
+        }else if (turnRoll==1){
+            text.setText("The Mage heals the hero!");
+            status.healHP(status.getHeroHPoints(), 40);
+            hptext.setText(String.valueOf(status.getHeroHPoints()));
+            healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
+        }
+    }
+
+    public void leoAttack (TextView text, int str){
+        int leoMinDmg = 30;
+        int leoMaxDmg = 70;
+
+        int npcDamage = (randomizer.nextInt((leoMaxDmg + str) - (leoMinDmg + str)) + (leoMinDmg + str));
+        monster.setMonHPts(monster.getMonHPts() - npcDamage);
+        text.setText(("Leo dealt "+npcDamage+" damage to "+monster.getMonsterName()));
     }
 
 

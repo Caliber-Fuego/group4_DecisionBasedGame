@@ -196,5 +196,101 @@ public class Dialogues {
                           "You felt a bit stronger.";
     public String M5_61 = "You read a book about how to lead people and about different tactics in the battlefield. \n" +
                           "You felt a bit smarter and now have an idea on how to lead people";
+
+    //Memory 5 END
+    public String M5_62 = "As the party decides to go inside the colonel's room, the door slowly opens by itself.";
+    public String M5_63 = "\"Hm? Who's there?\"";
+    public String M5_64 = "\"It's us you dipshit\"";
+    public String M5_65 = "\"Huh, Leo you came back huh? Who's these guests you brought with you?\"";
+    public String M5_66 = "\"Just a couple of people passing by, ignore us please!\"";
+    public String M5_67 = "\"What's the Knight of the Sun doing here? Now that I'm looking closely, " +
+                          "isn't that the Hero and the Celestial Magus?\"";
+    public String M5_68 = "\"Wow Leo, when I said to bring the hero's party with you if you have the chance, I " +
+                          "meant to say to bring them with you all tied up not like this!\"";
+    public String M5_69 = "\". . . \"";
+    public String M5_70 = "\"That anger in your eyes... could it be you're still mad at me for deciding " +
+                          "to experiment on your little sister back then? Don't give me that Leo! your " +
+                          "little sister was a convict you know?!\"";
+    public String M5_71 = "The colonel's laughs reverberated across the room as Leo angrily looks at him.";
+    public String M5_72 = "\"For what reason do you do all these experiments..?\"";
+    public String M5_73 = "\"Do I really need a reason to pursue for scientific advancement?\"";
+    public String M5_74 = "\"You irredeemable bastard!\"";
+    public String M5_75 = "The party's hatred towards the colonel flares up and each readies their own weapon.";
+    public String M5_76 = "\"A demon, a country bumpkin mage, a lawless mercenary turned into a loyal knight, " +
+                          "and some random soldier-turned hero... quite an impressive set of people don't you think?\"";
+    public String M5_77 = "\"So you've also done your research on us... Then you should know this is where you die!";
+    public String M5_78 = "The party charges in to the colonel!";
+
+    //Memory 5 Colonel Victory
+    public String M5_79 = "\"Haha... You know, while I did expect you guys to be strong, I didn't actually think " +
+                          "about what would happen if we were to fight... Hey hero do you think you c-\"";
+    public String M5_80 = "While the Colonel was speaking, Vincent tries to thrust his spear at him, however he narrowly avoided it.";
+    public String M5_81 = "\"Tch, you still have enough strength to dodge my thrusts\"";
+    public String M5_82 = "\"Hey I was still speaking you know! Damned youngsters..\"";
+    public String M5_83 = "\"Well let's make this quick and just die already!\"";
+    public String M5_84 = "Vincent tries to thrust his spear towards the Colonel once again, however a black substance blocks it this time. " +
+                          "Vincent immediately jumps back.";
+    public String M5_85 = "\"What the hell is that?!\"";
+    public String M5_86 = "\"Just another one of my successful researches.. I call it Dark Phantasms, not like it matters since I'm dying anyways..\"";
+    public String M5_87 = "\"Are those.. condensed spirits?\"";
+    public String M5_88 = "\"Haha, who knows? I'm not telling you assholes what this is before I die!\"";
+    public String M5_89 = "The substance then spirals around the room itself, slowly forming a giant black sphere. Vincent thrusts his" +
+                          " spear over and over towards the Colonel but the same substance was protecting him.";
+    public String M5_90 = "\"If I'm gonna die here, I might as well take the hero with me!\"";
+    public String M5_91 = "The Colonel shoots the giant sphere towards the hero, however-";
+    public String M5_92 = "\"Like hell i'm letting you!\"";
+    public String M5_93 = "Vincent blocks the sphere of dark substance with his own body.";
+    public String M5_94 = "\"How the hell are you even blocking it with your body?! That thing should go through physical objects " +
+                          "and disintegrate them inside damn it!\"";
+    public String M5_95 = "\"I return my body to the god of the sun...\"";
+    public String M5_96 = "\"Vincent no! What are you-\"";
+    public String M5_97 = "\"My soul, my sword and my achievements...\"";
+    public String M5_98 = "\"What's he doing?!\"";
+    public String M5_99 = "\"I have done over a thousand missions...\"";
+    public String M5_100 = "\"Haha... of course! No wonder you could block it with your body!\"";
+    public String M5_101 = "\"Unaware of loss nor aware of victory\"";
+    public String M5_102 = "\"He's sactificing his body for an overall power boost and property nullification... \n" +
+                           "But in this situation..\"";
+    public String M5_103 = "\"That's right! He disintegrates right after the boost wears off!\"";
+    public String M5_104 = "While hearing the Mage's and Colonel's explanation you watch Vincent's back as he tries his hardest " +
+                           "to protect you.";
+    public String M5_105 = "\"However, I suffer no regrets in life!\"";
+    public String M5_106 = "As Vincent's surroundings shine like the sun, so too did his body begin to disintegrate starting " +
+                           "from the hands that are holding the black sphere.";
+    public String M5_107 = "\"Yo Hero, you better do a good job in my place alright?\"";
+    public String M5_108 = "He never wanted fame, title nor money... Human vanity wasn't really even in his sight as he lived.";
+    public String M5_109 = "\"Fighting with you guys, adventuring through many places... and heck even seeing you accept to fight " +
+                           "side by side with humanity's so called enemy, the demons was amazing.\"";
+    public String M5_110 = "All he wanted was a good life, and up until now he did think he had a good one.";
+    public String M5_111 = "\"So don't die okay? Not until you solve whatever's happening in this world... you realized something too right?\"";
+    public String M5_112 = "But now that life of his has ended...";
+    public String M5_113 = "\"Heck, I'm not even sure if I'm talking with the present Hero or the future Hero... " +
+                           "regardless, don't give up okay?\"";
+    public String M5_114 = "As Vincent said his last words, he slowly disintegrates, and along with him the ball slowly disappears.";
+    public String M5_115 = "You hear the mage weeping for Vincent, the Colonel laughing like a maniac... and before you is the armor " +
+                           "Vincent left behind. You went and picked up the armor.";
+    public String M5_116 = "The memory ends there.";
+
+    //Talk Dialogue
+    public String T_1 = "\"Yo hero! missed me?\"";
+    public String T_2 = "\"Huh? You don't remember me? Well that's fine let's continue fight!";
+    public String T_3 = "\"Well, for you it might be years, but for me it was seconds...\"";
+    public String T_4 = "\"I was straight up summoned here right after I disintegrated you know?\"";
+    public String T_5 = "\"Hm? You don't remember what happened after I died?\"";
+    public String T_6 = "\"Well that's a problem! Not mine though, let's continue fighting!\"";
+    public String T_7 = "\"Why fight? Well I'm still cursed haha!\"";
+    public String T_8 = "The true boss appears!";
+
+    //Game End Dialogue
+    public String E_1 = "You killed the floor guardian and moved on towards the next floor.";
+    public String E_2 = "The next floor bosses were also people that reminded you of something.";
+    public String E_3 = "However you kill them all indiscriminately, including the final floor guardian.";
+    public String E_4 = "You beat the demon lord alone, however something feels missing.";
+    public String E_5 = "END";
+
+    //Game End Dialogue 2
+    public String G_1 = "You defeated the floor guardian, recruited him and moved on towards the next floor.";
+    public String G_2 = "The next floor bosses were also people that were from your past memories, and also recruited them.";
+    public String G_3 = "Together, you defeated the demon lord, saved the world and solved it's mysteries.";
 }
 
