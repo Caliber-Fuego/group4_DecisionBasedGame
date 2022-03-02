@@ -21,7 +21,7 @@ public class Monster_Colonel extends MonsterStatus {
     private int curse = 0;
 
     //Debuff Status
-    boolean cursedstatus = false;
+    private int cursedstatus = 0;
 
     public Monster_Colonel(){
         monsterName = "Demon Colonel";
@@ -39,12 +39,12 @@ public class Monster_Colonel extends MonsterStatus {
 
 
     public void curseMagic (TextView text){
-        if (cursedstatus=true){
+        if (cursedstatus==1){
             text.setText("The hero has already been cursed!");
         }else{
             text.setText("The "+monster.getMonsterName()+" has cursed you!");
             curse = 3;
-            cursedstatus = true;
+            cursedstatus = 1;
         }
     }
 
@@ -57,7 +57,7 @@ public class Monster_Colonel extends MonsterStatus {
             status.setHeroHPoints(status.getHeroHPoints() - this.cursedDamage);
             text.setText("The "+monster.getMonsterName()+"'s curse dealt "+this.cursedDamage+" damage to you");
             curse--;
-            cursedstatus = false;
+            cursedstatus = 0;
         }
 
     }

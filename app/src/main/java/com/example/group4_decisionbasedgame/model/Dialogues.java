@@ -41,6 +41,8 @@ public class Dialogues {
     public String M3_3 = "\"As for me, I'm the Sun Knight from now on, not as cool as a hero" +
                          " but hey, I like it!\" \n" +
                          "He was smiling like a child.";
+    public String M3_4 = "The memory ends there \n" +
+                         "Knowing that you were a hero, you felt a bit stronger.";
 
     //Memory 4 Dialogues
     public String M4_1 = "You are with several other armored people surrounding a table. \n" +

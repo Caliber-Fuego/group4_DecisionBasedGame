@@ -163,6 +163,8 @@ public class Story {
             case "magusTurn": magusTurn(); break;
             case "leoTurn": leoTurn(); break;
             case "m5memoryend2": m5memoryend2(); break;
+            case "bosscurse": bosscurse(); break;
+            case "bossburn": bossburn(); break;
             case "nomemorytalk": nomemorytalk(); break;
             case "memorytalk": memorytalk(); break;
             case "killend": killend(); break;
@@ -170,19 +172,17 @@ public class Story {
 
             //Dialogue Cases
             case "memoryd1":
-                if (dcounter==0) {
-                    gs.text.setText(dlg.M1_1);
-                    dcounter++;
-                }else if (dcounter==1){
-                    gs.text.setText(dlg.M1_2);
-                    dcounter++;
-                }else if (dcounter==2){
-                    gs.text.setText(dlg.M1_3);
-                    dcounter++;
-                }else if (dcounter==3) {
-                    gs.text.setText(dlg.M1_4);
-                    memoryCounter++;
-                    roomRoll(gs.text);
+                switch (dcounter){
+                    case 0:gs.text.setText(dlg.M1_1);
+                        dcounter++; break;
+                    case 1:gs.text.setText(dlg.M1_2);
+                        dcounter++; break;
+                    case 2:gs.text.setText(dlg.M1_3);
+                        dcounter++; break;
+                    case 3:gs.text.setText(dlg.M1_4);
+                        dcounter++;
+                        memoryCounter++;
+                        roomRoll(gs.text); break;
                 }
                 break;
             case "memoryd2":
@@ -208,46 +208,38 @@ public class Story {
                     }
                 break;
             case "memoryd2_1":
-                if (dcounter==0){
-                    gs.text.setText(dlg.M2_6);
-                    gs.btn1.setText("Let's stop.");
-                    dcounter++;
-                }else if (dcounter==1){
-                    gs.text.setText(dlg.M2_7);
-                    gs.image1.setImageResource(R.drawable.bg_room2);
-                    gs.btn1.setText("I'll pay you more.");
-                    dcounter++;
-                }else if (dcounter==2){
-                    gs.text.setText(dlg.M2_8);
-                    gs.image1.setImageResource(R.drawable.bg_room3);
-                    gs.btn1.setText("Continue");
-                    dcounter++;
-                }else if (dcounter==3){
-                    gs.text.setText("The memory ends there");
-                    memoryCounter++;
-                    roomRoll(gs.text);
-                }
-                break;
+                switch (dcounter){
+                    case 0: gs.text.setText(dlg.M2_6);
+                        gs.btn1.setText("Let's stop.");
+                        dcounter++; break;
+                    case 1: gs.text.setText(dlg.M2_7);
+                        gs.image1.setImageResource(R.drawable.bg_room2);
+                        gs.btn1.setText("I'll pay you more.");
+                        dcounter++;break;
+                    case 2: gs.text.setText(dlg.M2_8);
+                        gs.image1.setImageResource(R.drawable.bg_room3);
+                        gs.btn1.setText("Continue");
+                        dcounter++; break;
+                    case 3: gs.text.setText("The memory ends there");
+                        memoryCounter++;
+                        roomRoll(gs.text); break;
+
+                } break;
             case "memoryd3":
-                if (dcounter==0){
-                    gs.text.setText(dlg.M3_1);
-                    dcounter++;
-                }else if (dcounter==1){
-                    gs.text.setText(dlg.M3_2);
-                    gs.image1.setImageResource(R.drawable.bg_ceremony1);
-                    dcounter++;
-                }else if (dcounter==2){
-                    gs.text.setText(dlg.M3_3);
-                    gs.image1.setImageResource(R.drawable.bg_ceremony2);
-                    dcounter++;
-                }else if (dcounter==3){
-                    gs.text.setText("The memory ends there \n" +
-                                    "Knowing that you were a hero, you felt a bit stronger.");
-                    status.setSTR(status.getSTR()+10);
-                    memoryCounter++;
-                    roomRoll(gs.text);
-                }
-                break;
+                switch (dcounter){
+                    case 0: gs.text.setText(dlg.M3_1);
+                        dcounter++; break;
+                    case 1: gs.text.setText(dlg.M3_2);
+                        gs.image1.setImageResource(R.drawable.bg_ceremony1);
+                        dcounter++; break;
+                    case 2: gs.text.setText(dlg.M3_3);
+                        gs.image1.setImageResource(R.drawable.bg_ceremony2);
+                        dcounter++; break;
+                    case 3: gs.text.setText(dlg.M3_4);
+                        status.setSTR(status.getSTR()+10);
+                        memoryCounter++;
+                        roomRoll(gs.text); break;
+                }break;
             case "memoryd4":
                 if (dcounter==0){
                     gs.text.setText(dlg.M4_1);
@@ -706,32 +698,26 @@ public class Story {
     }
 
     public void m5elevator(){
-        if (ecounter==0){
-            gs.image1.setImageResource(R.drawable.bg_m5strongholdoorvin1);
-            gs.text.setText(dlg.M5_9);
-            ecounter++;
-        }else if (ecounter==1){
-            gs.image1.setImageResource(R.drawable.bg_m5strongholdoorleo1);
-            gs.text.setText(dlg.M5_10);
-            ecounter++;
-        }else if (ecounter==2){
-            gs.image1.setImageResource(R.drawable.bg_m5strongholdoormag1);
-            gs.text.setText(dlg.M5_11);
-            ecounter++;
-        }else if (ecounter==3){
-            gs.image1.setImageResource(R.drawable.bg_m5strongholdoorleo1);
-            gs.text.setText(dlg.M5_12);
-            ecounter++;
-        }else if (ecounter==4){
-            gs.image1.setImageResource(R.drawable.bg_m5strongholdoorleo1);
-            gs.text.setText(dlg.M5_13);
-            ecounter++;
-        }else if (ecounter==5){
-            gs.image1.setImageResource(R.drawable.bg_elevator);
-            gs.text.setText(dlg.M5_14);
-            ecounter++;
+        switch (ecounter){
+            case 0: gs.image1.setImageResource(R.drawable.bg_m5strongholdoorvin1);
+                gs.text.setText(dlg.M5_9);
+                ecounter++; break;
+            case 1: gs.image1.setImageResource(R.drawable.bg_m5strongholdoorleo1);
+                gs.text.setText(dlg.M5_10);
+                ecounter++; break;
+            case 2: gs.image1.setImageResource(R.drawable.bg_m5strongholdoormag1);
+                gs.text.setText(dlg.M5_11);
+                ecounter++; break;
+            case 3: gs.image1.setImageResource(R.drawable.bg_m5strongholdoorleo1);
+                gs.text.setText(dlg.M5_12);
+                ecounter++; break;
+            case 4: gs.image1.setImageResource(R.drawable.bg_m5strongholdoorleo1);
+                gs.text.setText(dlg.M5_13);
+                ecounter++; break;
+            case 5: gs.image1.setImageResource(R.drawable.bg_elevator);
+                gs.text.setText(dlg.M5_14);
+                ecounter++; break;
         }
-
 
         if (ecounter==6){
             gs.image1.setImageResource(R.drawable.bg_elevator);
@@ -1229,8 +1215,6 @@ public class Story {
         }else if(bossRoll==1){
             colonel.curseMagic(gs.text);
         }
-
-
 
          if (status.getHeroHPoints() > 0){
             setTexts("Fight", "", "", "");
@@ -1778,6 +1762,58 @@ public class Story {
         gs.btn2.setText("Talk");
 
         if (status.getHeroHPoints() > 0){
+            nextPosition1 = "bossFight";
+            nextPosition2 = "talkFight";
+
+            if (f1boss.getCurse() > 0){
+                setTexts(">", "", "", "");
+                nextPosition1 = "bosscurse";
+                nextPosition2 = "";
+            }
+
+            if (f1boss.getBurn() > 0){
+                setTexts(">", "", "", "");
+                nextPosition1 = "bosscurse";
+                nextPosition2 = "";
+            }
+
+        }
+        else if (status.getHeroHPoints() < 1){
+            nextPosition1 = "lose";
+            nextPosition2 = " ";
+        }
+    }
+
+    public void bosscurse(){
+        f1boss.cursedDamage(gs.text);
+        status.getHeroHPoints();
+        gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
+        gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
+
+        if (status.getHeroHPoints() > 0){
+            setTexts("Fight", "Talk", "","");
+            nextPosition1 = "bossFight";
+            nextPosition2 = "talkFight";
+                if (f1boss.getBurn() > 0){
+                    setTexts(">", "", "", "");
+                    nextPosition1 = "bossburn";
+                    nextPosition2 = "";
+                }
+        }
+        else if (status.getHeroHPoints() < 1){
+            nextPosition1 = "lose";
+            nextPosition2 = " ";
+        }
+    }
+
+    public void bossburn(){
+        f1boss.burnedDamage(gs.text);
+        status.getHeroHPoints();
+        gs.hptext.setText(String.valueOf(status.getHeroHPoints()));
+        gs.healthbar.setProgress(Integer.parseInt(String.valueOf(status.getHeroHPoints())));
+
+        if (status.getHeroHPoints() > 0){
+            setTexts("Fight", "Talk", "","");
             nextPosition1 = "bossFight";
             nextPosition2 = "talkFight";
         }
