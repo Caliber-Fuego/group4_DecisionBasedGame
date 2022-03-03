@@ -1,5 +1,6 @@
 package com.example.group4_decisionbasedgame.controller;
 
+import android.media.MediaPlayer;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class Story {
     GameScreen gs;
     HeroStats hs;
     Items items;
+    MediaPlayer player;
     public String nextPosition1, nextPosition2, nextPosition3, nextPosition4;
 
     //Lets Story call values from other classes
@@ -417,7 +419,6 @@ public class Story {
 
     //General outline for Dialogue and Decision Methods
     public void startingPoint(){
-
         //sets text for the case "startingPoint" or any of the other cases
         gs.image1.setImageResource(R.drawable.bg_castlegate);
 
@@ -466,7 +467,6 @@ public class Story {
 
     public void plainFields(){
         gs.image1.setImageResource(R.drawable.bg_plains);
-
         gs.text.setText("You look around and see a desolate wasteland full of nothing. \n" +
                         "You do however, find a bottle full of red substance.");
         items = new item_hpBottle();
@@ -547,6 +547,7 @@ public class Story {
         nextPosition2 = "startingPoint";
         }
     public  void monsterEncounter() {
+        gs.battlebgm();
         monster = new Monster_Slime();
         gs.image1.setImageResource(R.drawable.monster_slime);
         gs.text.setText("A " + monster.getMonsterName() + " attacks you! \n\n What do you do?");
@@ -559,7 +560,7 @@ public class Story {
         nextPosition4 = "";
     }
     public  void playerAttack(){
-
+        gs.slashsoundeffect();
         //Calculates Player Damage to the Monster
         int playerDamage = gc.baseDamage(status.getHeroMinDamage(), status.getHeroMaxDamage(),status.getSTR(), 0);
         gs.text.setText("You attacked the monster and gave " + playerDamage + " damage");
@@ -583,7 +584,7 @@ public class Story {
 
     }
     public void monsterAttack(){
-
+    gs.enemyattacksfx();
     //Calculates Monster Damage to the Player
         int monsterDamage = gc.baseDamage(monster.getMonMinDmg(),monster.getMonMaxDmg(), 0 , status.getArmor());
         gs.text.setText("The "+monster.getMonsterName()+" dealt "+monsterDamage+" damage to you");
@@ -609,6 +610,7 @@ public class Story {
     }
 
     public void win(){
+        gs.explorebgm();
         gs.text.setText("You beat the monster!");
         gs.image1.setImageResource(R.drawable.bg_cave);
         battleCounter++;
@@ -634,6 +636,7 @@ public class Story {
     }
 
     public void memory1(){
+        gs.memorybgm();
         gs.text.setText("You remember a memory from the old times.");
         gs.image1.setImageResource(R.drawable.bg_war);
         setDcounter(0);
@@ -643,10 +646,10 @@ public class Story {
         nextPosition2 = " ";
         nextPosition3 = " ";
         nextPosition4 = " ";
-
     }
 
     public void memory2(){
+        gs.memory2bgm();
         gs.text.setText("You remember a memory from the old times.");
         gs.image1.setImageResource(R.drawable.bg_strongholdoor);
         setDcounter(0);
@@ -657,6 +660,7 @@ public class Story {
     }
 
     public void memory3(){
+        gs.memorybgm();
         gs.text.setText("You remember a memory from the old times.");
         gs.image1.setImageResource(R.drawable.bg_ceremony);
         setDcounter(0);
@@ -670,6 +674,7 @@ public class Story {
     }
 
     public void memory4(){
+        gs.memory4bgm();
         gs.text.setText("You remember a memory from the old times.");
         gs.image1.setImageResource(R.drawable.bg_wartable);
         setDcounter(0);
@@ -684,6 +689,7 @@ public class Story {
     }
 
     public void memory5(){
+        gs.memory5bgm();
         gs.text.setText("You remember a memory from the old times.");
         gs.image1.setImageResource(R.drawable.bg_m5strongholdoor);
 
@@ -1080,7 +1086,7 @@ public class Story {
 
     public void m5memoryend() {
         switch (icounter) {
-            case 0: gs.text.setText(dlg.M5_62);icounter++;
+            case 0: gs.text.setText(dlg.M5_62);icounter++; gs.m5endbgm();
                 gs.image1.setImageResource(R.drawable.bg_colonelroom);break;
             case 1: gs.text.setText(dlg.M5_63);icounter++;
                 gs.image1.setImageResource(R.drawable.bg_colonelroom1);break;
@@ -1119,6 +1125,7 @@ public class Story {
             gs.text.setText(dlg.M5_78);
             gs.image1.setImageResource(R.drawable.bg_colonelroom);
             monster = new Monster_Colonel();
+            gs.m5endfight();
             setTexts("Fight", "", "", "");
 
             nextPosition1 = "m5colonelfight";
@@ -1136,6 +1143,7 @@ public class Story {
     }
 
     public void m5colonelfight(){
+        gs.slashsoundeffect();
         int playerDamage = gc.baseDamage(status.getHeroMinDamage(), status.getHeroMaxDamage(), status.getSTR() , 0);
         gs.text.setText("You attacked the "+monster.getMonsterName()+" and gave " + playerDamage + " damage");
 
@@ -1155,6 +1163,7 @@ public class Story {
     }
 
     public void vincentTurn(){
+        gs.slashsoundeffect();
         gs.image1.setImageResource(R.drawable.bg_colonelroomvin);
         gc.vincentAttack(gs.text, status.getSTR());
         monster.getMonHPts();
@@ -1170,6 +1179,7 @@ public class Story {
     }
 
     public void magusTurn(){
+        gs.slashsoundeffect();
         gs.image1.setImageResource(R.drawable.bg_castlegatemage);
         gc.magusAttack(gs.text, gs.hptext, gs.healthbar, status.getINT());
         monster.getMonHPts();
@@ -1185,6 +1195,7 @@ public class Story {
     }
 
     public void leoTurn(){
+        gs.slashsoundeffect();
         gs.image1.setImageResource(R.drawable.bg_castlegateleo);
         gc.leoAttack(gs.text, status.getSTR());
         monster.getMonHPts();
@@ -1200,6 +1211,7 @@ public class Story {
     }
 
     public void colonelAttack(){
+        gs.enemyattacksfx();
         gs.image1.setImageResource(R.drawable.bg_colonelroom1);
         Random roll = new Random();
         int bossRoll = roll.nextInt(2);
@@ -1256,7 +1268,7 @@ public class Story {
 
     public void m5memoryend2() {
         switch (jcounter) {
-            case 0: gs.text.setText(dlg.M5_79);jcounter++;
+            case 0: gs.text.setText(dlg.M5_79);jcounter++; gs.m5endbgm();
                 gs.image1.setImageResource(R.drawable.bg_colonelroom2);break;
             case 1: gs.text.setText(dlg.M5_80);jcounter++;
                 gs.image1.setImageResource(R.drawable.bg_colonelroomvin);break;
@@ -1282,7 +1294,7 @@ public class Story {
                 gs.image1.setImageResource(R.drawable.bg_colonelroom3);break;
             case 12: gs.text.setText(dlg.M5_91);jcounter++;
                 gs.image1.setImageResource(R.drawable.bg_colonelroom3);break;
-            case 13: gs.text.setText(dlg.M5_92);jcounter++;
+            case 13: gs.text.setText(dlg.M5_92);jcounter++; gs.vincent();
                 gs.image1.setImageResource(R.drawable.bg_colonelroomvin);break;
             case 14: gs.text.setText(dlg.M5_93);jcounter++;
                 gs.image1.setImageResource(R.drawable.bg_colonelroomvin);break;
@@ -1595,6 +1607,7 @@ public class Story {
     }
 
     public void lose (){
+        gs.explorebgm();
         gs.text.setText("You lost");
         deathCounter++;
 
@@ -1607,6 +1620,7 @@ public class Story {
     }
 
     public void healingRoom (){
+        gs.explorebgm();
         gs.text.setText("You are in a space where you are safe from monster attack \n\n" +
                         "You decide to take a rest");
         gs.image1.setImageResource(R.drawable.bg_cave);
@@ -1619,6 +1633,7 @@ public class Story {
         roomRoll(gs.text);
     }
     public void itemRoom (){
+        gs.explorebgm();
         gs.image1.setImageResource(R.drawable.bg_treasure);
         gc.itemRoll(gs.text, gs.itemqty1);
 
@@ -1627,6 +1642,7 @@ public class Story {
 
     public void minibossRoom (){
         monster = new Monster_Floor1Boss();
+        gs.m5endfight();
         gs.image1.setImageResource(R.drawable.monster_floor1boss);
         f1boss.setWeakened(0);
         gs.text.setText("a Floor master appears! \n" +
@@ -1639,6 +1655,7 @@ public class Story {
         nextPosition2 = "talkFight";
     }
     public void bossFight(){
+        gs.slashsoundeffect();
         int playerDamage = gc.baseDamage(status.getHeroMinDamage(), status.getHeroMaxDamage(), status.getSTR(), 0);
         gs.text.setText("You attacked the "+monster.getMonsterName()+" and gave " + playerDamage + " damage");
 
@@ -1746,6 +1763,7 @@ public class Story {
         }
     }
     public void bossAttack(){
+        gs.enemyattacksfx();
         Random roll = new Random();
         int bossRoll = roll.nextInt(2);
         if (bossRoll==0){
@@ -1825,7 +1843,7 @@ public class Story {
 
     public void killend(){
         switch(lcounter){
-            case 0: gs.text.setText(dlg.E_1);lcounter++;
+            case 0: gs.text.setText(dlg.E_1);lcounter++; gs.memorybgm();
                 gs.image1.setImageResource(R.drawable.bg_cave);break;
             case 1: gs.text.setText(dlg.E_2);lcounter++;
                 gs.image1.setImageResource(R.drawable.bg_cave);break;
@@ -1851,7 +1869,7 @@ public class Story {
 
     public void goodend(){
         switch(lcounter){
-            case 0: gs.text.setText(dlg.G_1);lcounter++;
+            case 0: gs.text.setText(dlg.G_1);lcounter++; gs.memorybgm();
                 gs.image1.setImageResource(R.drawable.bg_cave);break;
             case 1: gs.text.setText(dlg.G_2);lcounter++;
                 gs.image1.setImageResource(R.drawable.bg_cave);break;

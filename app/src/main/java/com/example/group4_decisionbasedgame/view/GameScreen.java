@@ -3,6 +3,7 @@ package com.example.group4_decisionbasedgame.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,12 +22,13 @@ import com.example.group4_decisionbasedgame.model.values.items.item_hpBottle;
 import com.example.group4_decisionbasedgame.model.values.weapon.Weapon_Barehand;
 
 public class GameScreen extends AppCompatActivity implements View.OnClickListener {
-
     public TextView text, hptext, wpntxt, itemqty1;
     public Button btn1, btn2, btn3, btn4, statsbtn;
     public ImageButton itembtn1;
     public ImageView image1;
     public ProgressBar healthbar;
+
+    MediaPlayer player, battle;
 
     //Allows GameScreen class to call strings from Story class
     Story story = new Story(this);
@@ -66,6 +68,9 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         story.startingPoint();
         status = new Weapon_Barehand();
         item = new item_hpBottle();
+        player = MediaPlayer.create(this,R.raw.field);
+        battle = MediaPlayer.create(this,R.raw.fulcrum);
+
 
         //Displays the health points of the player
         hptext.setText(String.valueOf(status.getHeroHPoints()));
@@ -93,7 +98,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         startActivity(openHeroStats);
 
     }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -112,4 +116,104 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         }
     }
 
+
+    //Music Related
+    public void explorebgm(){
+        if( player.isPlaying()){
+            player.pause();
+        }
+        player = MediaPlayer.create(this,R.raw.field);
+        player.start();
+        player.setLooping(true);
+    }
+
+    public void battlebgm (){
+        if (player.isPlaying()){
+            player.pause();
+        }
+        player = MediaPlayer.create(this, R.raw.fulcrum);
+        player.start();
+    }
+    public void m5endfight (){
+        if (player.isPlaying()){
+            player.pause();
+        }
+        player = MediaPlayer.create(this, R.raw.colonelfight);
+        player.start();
+    }
+
+    public void memorybgm(){
+        if (player.isPlaying()){
+            player.pause();
+        }
+        player = MediaPlayer.create(this, R.raw.memory);
+        player.start();
+        player.setLooping(true);
+    }
+
+    public void memory2bgm(){
+        if (player.isPlaying()){
+            player.pause();
+        }
+        player = MediaPlayer.create(this, R.raw.memory2);
+        player.start();
+        player.setLooping(true);
+    }
+
+    public void memory4bgm(){
+        if (player.isPlaying()){
+            player.pause();
+        }
+        player = MediaPlayer.create(this, R.raw.memory3);
+        player.start();
+    }
+    public void memory5bgm(){
+        if (player.isPlaying()){
+            player.pause();
+        }
+        player = MediaPlayer.create(this, R.raw.nighttime);
+        player.setLooping(true);
+        player.start();
+    }
+
+    public void m5endbgm(){
+        if (player.isPlaying()){
+            player.pause();
+        }
+        player = MediaPlayer.create(this, R.raw.colonelroom);
+        player.start();
+    }
+
+    public void vincent(){
+        if (player.isPlaying()){
+            player.pause();
+        }
+        player = MediaPlayer.create(this, R.raw.rebellion);
+        player.start();
+    }
+
+    public void slashsoundeffect(){
+        battle = MediaPlayer.create(this, R.raw.slash);
+        battle.start();
+    }
+
+    public void enemyattacksfx(){
+        battle = MediaPlayer.create(this, R.raw.enemyattack);
+        battle.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (player.isPlaying()) {
+            player.pause();
+        }if (player.isLooping()){
+            player.pause();
+        }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        player.start();
+    }
 }
