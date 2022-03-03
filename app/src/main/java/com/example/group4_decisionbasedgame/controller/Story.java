@@ -1645,6 +1645,7 @@ public class Story {
         gs.m5endfight();
         gs.image1.setImageResource(R.drawable.monster_floor1boss);
         f1boss.setWeakened(0);
+        kcounter = 0;
         gs.text.setText("a Floor master appears! \n" +
                         "A knight cursed by the Demon Lord, his presence feels familiar to you. \n" +
                         "You unlocked the TALK option!");
@@ -1673,7 +1674,7 @@ public class Story {
             nextPosition1 = "killend";
             nextPosition2 = " ";
 
-            if(f1boss.getWeakened()==8){
+            if(f1boss.getWeakened()>=8){
                 nextPosition1 = "goodend";
             }
         }
@@ -1725,7 +1726,7 @@ public class Story {
             gs.text.setText(dlg.T_8);
             gs.image1.setImageResource(R.drawable.monster_truefloor1boss);
             setTexts("Continue", "", "", "");
-                nextPosition1 = "bossAttack";
+                nextPosition1 = "bossFight";
                 nextPosition2 = " ";
         }else {
             setTexts("Continue", "", "", "");
@@ -1754,7 +1755,7 @@ public class Story {
             gs.text.setText(dlg.T_8);
             gs.image1.setImageResource(R.drawable.monster_truefloor1boss);
             setTexts("Continue", "", "", "");
-            nextPosition1 = "bossAttack";
+            nextPosition1 = "bossFight";
             nextPosition2 = " ";
         }else {
             setTexts("Continue", "", "", "");
